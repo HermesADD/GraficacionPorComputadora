@@ -288,7 +288,7 @@ class Matrix3 {
   invert() {
     const det = this.determinant();
     if (Math.abs(det) < epsilon) {
-      throw new Error('La matris no es invertible');
+      throw new Error('La matriz no es invertible');
     }
 
     const adj = this.adjoint();
