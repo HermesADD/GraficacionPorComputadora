@@ -170,7 +170,15 @@ class Matrix3 {
     a10=0, a11=1, a12=0, 
     a20=0, a21=0, a22=1
   ) {
-
+    this.a00 = a00;
+    this.a01 = a01;
+    this.a02 = a02;
+    this.a10 = a10;
+    this.a11 = a11;
+    this.a12 = a12;
+    this.a20 = a20;
+    this.a21 = a21;
+    this.a22 = a22;
   }
 
   /**
@@ -180,7 +188,11 @@ class Matrix3 {
    * @return {Matrix3}
    */
   static add(m1, m2) {
-
+    return new Matrix3(
+      m1.a00 + m2.a00, m1.a01 + m2.a01, m1.a02 + m2.a02,
+      m1.a10 + m2.a10, m1.a11 + m2.a11, m1.a12 + m2.a12,
+      m1.a20 + m2.a20, m1.a21 + m2.a21, m1.a22 + m2.a22
+    )
   }
 
   /**
@@ -188,6 +200,18 @@ class Matrix3 {
    * @return {Matrix3}
    */
   adjoint() {
+    return new Matrix3(
+      (this.a11 * this.a22 - this.a12 * this.a21),  // Cofactor de a00
+      -(this.a10 * this.a22 - this.a12 * this.a20), // Cofactor de a01
+      (this.a10 * this.a21 - this.a11 * this.a20),  // Cofactor de a02
+      -(this.a01 * this.a22 - this.a02 * this.a21), // Cofactor de a10
+      (this.a00 * this.a22 - this.a02 * this.a20),  // Cofactor de a11
+      -(this.a00 * this.a21 - this.a01 * this.a20), // Cofactor de a12
+      (this.a01 * this.a12 - this.a02 * this.a11),  // Cofactor de a20
+      -(this.a00 * this.a12 - this.a02 * this.a10), // Cofactor de a21
+      (this.a00 * this.a11 - this.a01 * this.a10)   // Cofactor de a22
+    );
+  
 
   }
 
@@ -196,7 +220,11 @@ class Matrix3 {
    * @return {Matrix3}
    */
   clone() {
-
+    return new Matrix3(
+      this.a00, this.a01, this.a02,
+      this.a10, this.a11, this.a12,
+      this.a20, this.a21, this.a22
+    );
   }
 
   /**
@@ -204,7 +232,11 @@ class Matrix3 {
    * @return {Number}
    */
   determinant() {
-
+    return (
+      this.a00 * (this.a11 * this.a22 - this.a12 * this.a21) -
+      this.a01 * (this.a10 * this.a22 - this.a12 * this.a20) +
+      this.a02 * (this.a10 * this.a21 - this.a11 * this.a20)
+    );
   }
 
   /**
