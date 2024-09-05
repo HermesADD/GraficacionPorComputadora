@@ -246,7 +246,17 @@ class Matrix3 {
    * @return {Boolean}
    */
   static equals(m1, m2) {
-
+    return (
+      Math.abs(m1.a00 - m2.a00) < epsilon &&
+      Math.abs(m1.a01 - m2.a01) < epsilon &&
+      Math.abs(m1.a02 - m2.a02) < epsilon &&
+      Math.abs(m1.a10 - m2.a10) < epsilon &&
+      Math.abs(m1.a11 - m2.a11) < epsilon &&
+      Math.abs(m1.a12 - m2.a12) < epsilon &&
+      Math.abs(m1.a20 - m2.a20) < epsilon &&
+      Math.abs(m1.a21 - m2.a21) < epsilon &&
+      Math.abs(m1.a22 - m2.a22) < epsilon
+    );
   }
 
   /**
@@ -255,14 +265,20 @@ class Matrix3 {
    * @return {Boolean}
    */
   static exactEquals(m1, m2) {
-
+    return (
+      m1.a00 === m2.a00 && m1.a01 === m2.a01 && m1.a02 === m2.a02 &&
+      m1.a10 === m2.a10 && m1.a11 === m2.a11 && m1.a12 === m2.a12 &&
+      m1.a20 === m2.a20 && m1.a21 === m2.a21 && m1.a22 === m2.a22
+    );
   }
 
   /**
    * Función que asigna los valores de la matriz identidad a la matriz desde donde se invocó la función.
    */
   identity() {
-
+    this.a00 = 1; this.a01 = 0; this.a02 = 0;
+    this.a10 = 0; this.a11 = 1; this.a12 = 0;
+    this.a20 = 0; this.a21 = 0; this.a22 = 1;
   }
 
   /**
@@ -270,7 +286,13 @@ class Matrix3 {
    * @return {Matrix3}
    */
   invert() {
+    const det = this.determinant();
+    if (Math.abs(det) < epsilon) {
+      throw new Error('La matris no es invertible');
+    }
 
+    const adj = this.adjoint();
+    return Matrix3.multiplyScalar(adj, 1 / det);
   }
 
   /**
@@ -280,7 +302,19 @@ class Matrix3 {
    * @return {Matrix3}
    */
   static multiply(m1, m2) {
+    return new Matrix3(
+      m1.a00 * m2.a00 + m1.a01 * m2.a10 + m1.a02 * m2.a20, 
+      m1.a00 * m2.a01 + m1.a01 * m2.a11 + m1.a02 * m2.a21, 
+      m1.a00 * m2.a02 + m1.a01 * m2.a12 + m1.a02 * m2.a22, 
 
+      m1.a10 * m2.a00 + m1.a11 * m2.a10 + m1.a12 * m2.a20,
+      m1.a10 * m2.a01 + m1.a11 * m2.a11 + m1.a12 * m2.a21,
+      m1.a10 * m2.a02 + m1.a11 * m2.a12 + m1.a12 * m2.a22,
+
+      m1.a20 * m2.a00 + m1.a21 * m2.a10 + m1.a22 * m2.a20,
+      m1.a20 * m2.a01 + m1.a21 * m2.a11 + m1.a22 * m2.a21,
+      m1.a20 * m2.a02 + m1.a21 * m2.a12 + m1.a22 * m2.a22
+    );
   }
 
   /**
@@ -290,7 +324,11 @@ class Matrix3 {
    * @return {Matrix3}
    */
   static multiplyScalar(m1, c) {
-
+    return new Matrix3(
+      m1.a00 * c, m1.a01 * c, m1.a02 * c,
+      m1.a10 * c, m1.a11 * c, m1.a12 * c,
+      m1.a20 * c, m1.a21 * c, m1.a22 * c
+    );
   }
 
   /**
@@ -299,7 +337,11 @@ class Matrix3 {
    * @return {Vector3}
    */
   multiplyVector(v) {
+    const x = this.a00 * v.x + this.a01 * v.y + this.a02 * v.z;
+    const y = this.a10 * v.x + this.a11 * v.y + this.a12 * v.z;
+    const z = this.a20 * v.x + this.a21 * v.y + this.a22 * v.z;
 
+    return new Vector3(x,y,z);
   }
 
   /**
@@ -308,7 +350,14 @@ class Matrix3 {
    * @return {Matrix3}
    */
   static rotate(theta) {
-
+    const cosTheta = Math.cos(theta);
+    const sinTheta = Math.sin(theta);
+  
+    return new Matrix3(
+      cosTheta, -sinTheta, 0,
+      sinTheta, cosTheta, 0,
+      0, 0, 1
+    );
   }
 
   /**
@@ -318,7 +367,11 @@ class Matrix3 {
    * @return {Matrix3}
    */
   static scale(sx, sy) {
-
+    return new Matrix3(
+      sx, 0, 0,
+      0, sy, 0,
+      0, 0, 1
+    );
   }
 
   /**
@@ -334,7 +387,15 @@ class Matrix3 {
    * @param {Number} a22
    */
   set(a00, a01, a02, a10, a11, a12, a20, a21, a22) {
-
+    this.a00 = a00;
+    this.a01 = a01;
+    this.a02 = a02;
+    this.a10 = a10;
+    this.a11 = a11;
+    this.a12 = a12;
+    this.a20 = a20;
+    this.a21 = a21;
+    this.a22 = a22;
   }
 
   /**
@@ -344,7 +405,11 @@ class Matrix3 {
    * @return {Matrix3}
    */
   static subtract(m1, m2) {
-
+    return new Matrix3(
+      m1.a00 - m2.a00, m1.a01 - m2.a01, m1.a02 - m2.a02,
+      m1.a10 - m2.a10, m1.a11 - m2.a11, m1.a12 - m2.a12,
+      m1.a20 - m2.a20, m1.a21 - m2.a21, m1.a22 - m2.a22
+    );
   }
 
   /**
@@ -354,7 +419,11 @@ class Matrix3 {
    * @return {Matrix3}
    */
   static translate(tx, ty) {
-
+    return new Matrix3(
+      1, 0, tx,
+      0, 1, ty,
+      0, 0, 1
+    );
   }
 
   /**
@@ -362,6 +431,10 @@ class Matrix3 {
    * @return {Matrix3}
    */
   transpose() {
-
+    return new Matrix3(
+      this.a00, this.a10, this.a20,
+      this.a01, this.a11, this.a21,
+      this.a02, this.a12, this.a22
+    );
   }
 }
