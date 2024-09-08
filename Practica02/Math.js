@@ -200,19 +200,23 @@ class Matrix3 {
    * @return {Matrix3}
    */
   adjoint() {
-    return new Matrix3(
-      (this.a11 * this.a22 - this.a12 * this.a21),  // Cofactor de a00
-      -(this.a10 * this.a22 - this.a12 * this.a20), // Cofactor de a01
-      (this.a10 * this.a21 - this.a11 * this.a20),  // Cofactor de a02
-      -(this.a01 * this.a22 - this.a02 * this.a21), // Cofactor de a10
-      (this.a00 * this.a22 - this.a02 * this.a20),  // Cofactor de a11
-      -(this.a00 * this.a21 - this.a01 * this.a20), // Cofactor de a12
-      (this.a01 * this.a12 - this.a02 * this.a11),  // Cofactor de a20
-      -(this.a00 * this.a12 - this.a02 * this.a10), // Cofactor de a21
-      (this.a00 * this.a11 - this.a01 * this.a10)   // Cofactor de a22
-    );
-  
+    const c00 = this.a11 * this.a22 - this.a12 * this.a21;
+    const c01 = -(this.a10 * this.a22 - this.a12 * this.a20);
+    const c02 = this.a10 * this.a21 - this.a11 * this.a20;
 
+    const c10 = -(this.a01 * this.a22 - this.a02 * this.a21);
+    const c11 = this.a00 * this.a22 - this.a02 * this.a20;
+    const c12 = -(this.a00 * this.a21 - this.a01 * this.a20);
+
+    const c20 = this.a01 * this.a12 - this.a02 * this.a11;
+    const c21 = -(this.a00 * this.a12 - this.a02 * this.a10);
+    const c22 = this.a00 * this.a11 - this.a01 * this.a10;
+
+    return new Matrix3(
+      c00, c10, c20,
+      c01, c11, c21,
+      c02, c12, c22
+    );
   }
 
   /**
