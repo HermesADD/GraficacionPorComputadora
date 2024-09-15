@@ -70,26 +70,23 @@ window.addEventListener("load", function(evt) {
   );
 
   // quitar el comentario en el siguiente bloque para obtener el ejemplo de proyección en perspectiva por medio del frustrum
-  /**
-  let projectionMatrix = Matrix4.frustum(
+  let projectionMatrix1 = Matrix4.frustum(
     -w, w,                // left, right
     -w/aspect, w/aspect,  // bottom, top
     3, 100                // near, far
   );
-  */
 
   // quitar el comentario en el siguiente bloque para obtener el ejemplo de proyección ortográfica
-  /**
-  let projectionMatrix = Matrix4.orthographic(
+  let projectionMatrix2 = Matrix4.orthographic(
     -w, w,               // left, right
     -w/aspect, w/aspect, // bottom, top
     0.1, 100             // near, far
   );
-  */
+  
 
   // se crea una matrix que conjunta las transformaciones de la cámara y de la proyección
   // hay que recordar que primero se realiza la transformación de la cámara y luego la de la perspectiva
-  let projectionViewMatrix = Matrix4.multiply(projectionMatrix, viewMatrix);
+  let projectionViewMatrix = Matrix4.multiply(projectionMatrix1, viewMatrix);
 
   /**
    * Esta función en necesaria ya que estamos usando 2D para dibujar los objetos 3D

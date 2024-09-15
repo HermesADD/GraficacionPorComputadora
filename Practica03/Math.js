@@ -620,7 +620,22 @@ class Matrix4 {
     a20=0, a21=0, a22=1, a23=0,
     a30=0, a31=0, a32=0, a33=1
   ) {
-
+    this.a00 = a00;
+    this.a01 = a01;
+    this.a02 = a02;
+    this.a03 = a03;
+    this.a10 = a10;
+    this.a11 = a11;
+    this.a12 = a12;
+    this.a13 = a13;
+    this.a20 = a20;
+    this.a21 = a21;
+    this.a22 = a22;
+    this.a23 = a23;
+    this.a30 = a30;
+    this.a31 = a31;
+    this.a32 = a32;
+    this.a33 = a33;
   }
 
   /**
@@ -630,7 +645,12 @@ class Matrix4 {
    * @return {Matrix4}
    */
   static add(m1, m2) {
-
+    return new Matrix4(
+      m1.a00 + m2.a00, m1.a01 + m2.a01, m1.a02 + m2.a02, m1.a03 + m2.a03,
+      m1.a10 + m2.a10, m1.a11 + m2.a11, m1.a12 + m2.a12, m1.a13 + m2.a13,
+      m1.a20 + m2.a20, m1.a21 + m2.a21, m1.a22 + m2.a22, m1.a23 + m2.a23,
+      m1.a30 + m2.a30, m1.a31 + m2.a31, m1.a32 + m2.a32, m1.a33 + m2.a33,
+    )
   }
 
   /**
@@ -638,7 +658,32 @@ class Matrix4 {
    * @return {Matrix4}
    */
   adjoint() {
-
+    const c00 = this.a11 * (this.a22 * this.a33 - this.a23 * this.a32) - this.a12 * (this.a21 * this.a33 - this.a23 * this.a31) + this.a13 * (this.a21 * this.a32 - this.a22 * this.a31);
+    const c01 = -(this.a10 * (this.a22 * this.a33 - this.a23 * this.a32) - this.a12 * (this.a20 * this.a33 - this.a23 * this.a30) + this.a13 * (this.a20 * this.a32 - this.a22 * this.a30));
+    const c02 = this.a10 * (this.a21 * this.a33 - this.a23 * this.a31) - this.a11 * (this.a20 * this.a33 - this.a23 * this.a30) + this.a13 * (this.a20 * this.a31 - this.a21 * this.a30);
+    const c03 = -(this.a10 * (this.a21 * this.a32 - this.a22 * this.a31) - this.a11 * (this.a20 * this.a32 - this.a22 * this.a30) + this.a12 * (this.a20 * this.a31 - this.a21 * this.a30));
+  
+    const c10 = -(this.a01 * (this.a22 * this.a33 - this.a23 * this.a32) - this.a02 * (this.a21 * this.a33 - this.a23 * this.a31) + this.a03 * (this.a21 * this.a32 - this.a22 * this.a31));
+    const c11 = this.a00 * (this.a22 * this.a33 - this.a23 * this.a32) - this.a02 * (this.a20 * this.a33 - this.a23 * this.a30) + this.a03 * (this.a20 * this.a32 - this.a22 * this.a30);
+    const c12 = -(this.a00 * (this.a21 * this.a33 - this.a23 * this.a31) - this.a01 * (this.a20 * this.a33 - this.a23 * this.a30) + this.a03 * (this.a20 * this.a31 - this.a21 * this.a30));
+    const c13 = this.a00 * (this.a21 * this.a32 - this.a22 * this.a31) - this.a01 * (this.a20 * this.a32 - this.a22 * this.a30) + this.a02 * (this.a20 * this.a31 - this.a21 * this.a30);
+  
+    const c20 = this.a01 * (this.a12 * this.a33 - this.a13 * this.a32) - this.a02 * (this.a11 * this.a33 - this.a13 * this.a31) + this.a03 * (this.a11 * this.a32 - this.a12 * this.a31);
+    const c21 = -(this.a00 * (this.a12 * this.a33 - this.a13 * this.a32) - this.a02 * (this.a10 * this.a33 - this.a13 * this.a30) + this.a03 * (this.a10 * this.a32 - this.a12 * this.a30));
+    const c22 = this.a00 * (this.a11 * this.a33 - this.a13 * this.a31) - this.a01 * (this.a10 * this.a33 - this.a13 * this.a30) + this.a03 * (this.a10 * this.a31 - this.a11 * this.a30);
+    const c23 = -(this.a00 * (this.a11 * this.a32 - this.a12 * this.a31) - this.a01 * (this.a10 * this.a32 - this.a12 * this.a30) + this.a02 * (this.a10 * this.a31 - this.a11 * this.a30));
+  
+    const c30 = -(this.a01 * (this.a12 * this.a23 - this.a13 * this.a22) - this.a02 * (this.a11 * this.a23 - this.a13 * this.a21) + this.a03 * (this.a11 * this.a22 - this.a12 * this.a21));
+    const c31 = this.a00 * (this.a12 * this.a23 - this.a13 * this.a22) - this.a02 * (this.a10 * this.a23 - this.a13 * this.a20) + this.a03 * (this.a10 * this.a22 - this.a12 * this.a20);
+    const c32 = -(this.a00 * (this.a11 * this.a23 - this.a13 * this.a21) - this.a01 * (this.a10 * this.a23 - this.a13 * this.a20) + this.a03 * (this.a10 * this.a21 - this.a11 * this.a20));
+    const c33 = this.a00 * (this.a11 * this.a22 - this.a12 * this.a21) - this.a01 * (this.a10 * this.a22 - this.a12 * this.a20) + this.a02 * (this.a10 * this.a21 - this.a11 * this.a20);
+  
+    return new Matrix4(
+      c00, c10, c20, c30,
+      c01, c11, c21, c31,
+      c02, c12, c22, c32,
+      c03, c13, c23, c33
+    );
   }
 
   /**
@@ -646,7 +691,12 @@ class Matrix4 {
    * @return {Matrix4}
    */
   clone() {
-
+    return new Matrix4(
+      this.a00, this.a01, this.a02, this.a03,
+      this.a10, this.a11, this.a12, this.a13,
+      this.a20, this.a21, this.a22, this.a23,
+      this.a30, this.a31, this.a32, this.a33
+    );
   }
 
   /**
@@ -654,7 +704,23 @@ class Matrix4 {
    * @return {Number}
    */
   determinant()  {
-
+    return (
+      this.a00 * (this.a11 * (this.a22 * this.a33 - this.a23 * this.a32) -
+                  this.a12 * (this.a21 * this.a33 - this.a23 * this.a31) +
+                  this.a13 * (this.a21 * this.a32 - this.a22 * this.a31)) -
+  
+      this.a01 * (this.a10 * (this.a22 * this.a33 - this.a23 * this.a32) -
+                  this.a12 * (this.a20 * this.a33 - this.a23 * this.a30) +
+                  this.a13 * (this.a20 * this.a32 - this.a22 * this.a30)) +
+  
+      this.a02 * (this.a10 * (this.a21 * this.a33 - this.a23 * this.a31) -
+                  this.a11 * (this.a20 * this.a33 - this.a23 * this.a30) +
+                  this.a13 * (this.a20 * this.a31 - this.a21 * this.a30)) -
+  
+      this.a03 * (this.a10 * (this.a21 * this.a32 - this.a22 * this.a31) -
+                  this.a11 * (this.a20 * this.a32 - this.a22 * this.a30) +
+                  this.a12 * (this.a20 * this.a31 - this.a21 * this.a30))
+    );
   }
 
   /**
@@ -664,7 +730,12 @@ class Matrix4 {
    * @return {Boolean}
    */
   static equals(m1, m2) {
-
+    return (
+      Math.abs(m1.a00 - m2.a00) < epsilon && Math.abs(m1.a01 - m2.a01) < epsilon && Math.abs(m1.a02 - m2.a02) < epsilon && Math.abs(m1.a03 - m2.a03) < epsilon &&
+      Math.abs(m1.a10 - m2.a10) < epsilon && Math.abs(m1.a11 - m2.a11) < epsilon && Math.abs(m1.a12 - m2.a12) < epsilon && Math.abs(m1.a13 - m2.a13) < epsilon &&
+      Math.abs(m1.a20 - m2.a20) < epsilon && Math.abs(m1.a21 - m2.a21) < epsilon && Math.abs(m1.a22 - m2.a22) < epsilon && Math.abs(m1.a23 - m2.a23) < epsilon &&
+      Math.abs(m1.a30 - m2.a30) < epsilon && Math.abs(m1.a31 - m2.a31) < epsilon && Math.abs(m1.a32 - m2.a32) < epsilon && Math.abs(m1.a33 - m2.a33) < epsilon
+    );
   }
 
   /**
@@ -674,7 +745,12 @@ class Matrix4 {
    * @return {Boolean}
    */
   static exactEquals(m1, m2) {
-
+    return (
+      m1.a00 === m2.a00 && m1.a01 === m2.a01 && m1.a02 === m2.a02 && m1.a03 === m2.a03 &&
+      m1.a10 === m2.a10 && m1.a11 === m2.a11 && m1.a12 === m2.a12 && m1.a13 === m2.a13 &&
+      m1.a20 === m2.a20 && m1.a21 === m2.a21 && m1.a22 === m2.a22 && m1.a23 === m2.a23 &&
+      m1.a30 === m2.a30 && m1.a31 === m2.a31 && m1.a32 === m2.a32 && m1.a33 === m2.a33 
+    );
   }
 
   /**
@@ -688,14 +764,22 @@ class Matrix4 {
    * @return {Matrix4}
    */
   static frustum(left, right, bottom, top, near, far) {
-
+    return new Matrix4(
+      2*near/(right-left), 0, (right+left)/(right-left), 0,
+      0, 2*near/(top-bottom), (top+bottom)/(top-bottom), 0,
+      0, 0, -(far+near)/(far-near), -(2*near*far)/(far-near),
+      0, 0, -1, 0
+    )
   }
 
   /**
    * Función que asigna los valores de la matriz identidad a la matriz desde donde se invocó la función.
    */
   identity() {
-
+    this.a00 = 1; this.a01 = 0; this.a02 = 0; this.a03 = 0;
+    this.a10 = 0; this.a11 = 1; this.a12 = 0; this.a13 = 0;
+    this.a20 = 0; this.a21 = 0; this.a22 = 1; this.a23 = 0;
+    this.a30 = 0; this.a31 = 0; this.a32 = 1; this.a33 = 0;
   }
 
   /**
@@ -703,7 +787,14 @@ class Matrix4 {
    * @return {Matrix4}
    */
   invert() {
+    const det = this.determinant();
 
+    if(det === 0){
+      throw new Error("La matriz no tiene inversa");
+    }
+
+    const adj = this.adjoint();
+    return Matrix4.multiplyScalar(adj,1/det);
   }
 
   /**
@@ -714,7 +805,25 @@ class Matrix4 {
    * @return {Matrix4}
    */
   static lookAt(eye, center, up) {
+    const w = Vector3.subtract(eye, center).normalize();
+    const u = Vector3.cross(up, w).normalize();
+    const v = Vector3.cross(w,u).normalize();
 
+    const base = new Matrix4(
+      u.x, u.y, u.z, 0,
+      v.x, v.y, v.z, 0,
+      w.x, w.y, w.z, 0,
+      0,   0,   0,   1
+    );
+
+    const trans = new Matrix4(
+      1, 0, 0, -eye.x,
+      0, 1, 0, -eye.y,
+      0, 0, 1, -eye.z,
+      0, 0, 0, 1
+    );
+
+    return this.multiply(base,trans);
   }
 
   /**
@@ -724,7 +833,25 @@ class Matrix4 {
    * @return {Matrix4}
    */
   static multiply(m1, m2) {
-
+    return new Matrix4(
+      m1.a00 * m2.a00 + m1.a01 * m2.a10 + m1.a02 * m2.a20 + m1.a03 * m2.a30,
+      m1.a00 * m2.a01 + m1.a01 * m2.a11 + m1.a02 * m2.a21 + m1.a03 * m2.a31,
+      m1.a00 * m2.a02 + m1.a01 * m2.a12 + m1.a02 * m2.a22 + m1.a03 * m2.a32,
+      m1.a00 * m2.a03 + m1.a01 * m2.a13 + m1.a02 * m2.a23 + m1.a03 * m2.a33,
+      m1.a10 * m2.a00 + m1.a11 * m2.a10 + m1.a12 * m2.a20 + m1.a13 * m2.a30,
+      m1.a10 * m2.a01 + m1.a11 * m2.a11 + m1.a12 * m2.a21 + m1.a13 * m2.a31,
+      m1.a10 * m2.a02 + m1.a11 * m2.a12 + m1.a12 * m2.a22 + m1.a13 * m2.a32,
+      m1.a10 * m2.a03 + m1.a11 * m2.a13 + m1.a12 * m2.a23 + m1.a13 * m2.a33,
+      m1.a20 * m2.a00 + m1.a21 * m2.a10 + m1.a22 * m2.a20 + m1.a23 * m2.a30,
+      m1.a20 * m2.a01 + m1.a21 * m2.a11 + m1.a22 * m2.a21 + m1.a23 * m2.a31,
+      m1.a20 * m2.a02 + m1.a21 * m2.a12 + m1.a22 * m2.a22 + m1.a23 * m2.a32,
+      m1.a20 * m2.a03 + m1.a21 * m2.a13 + m1.a22 * m2.a23 + m1.a23 * m2.a33,
+      m1.a30 * m2.a00 + m1.a31 * m2.a10 + m1.a32 * m2.a20 + m1.a33 * m2.a30,
+      m1.a30 * m2.a01 + m1.a31 * m2.a11 + m1.a32 * m2.a21 + m1.a33 * m2.a31,
+      m1.a30 * m2.a02 + m1.a31 * m2.a12 + m1.a32 * m2.a22 + m1.a33 * m2.a32,
+      m1.a30 * m2.a03 + m1.a31 * m2.a13 + m1.a32 * m2.a23 + m1.a33 * m2.a33
+    );
+  
   }
 
   /**
@@ -734,7 +861,12 @@ class Matrix4 {
    * @return {Matrix4}
    */
   static multiplyScalar(m1, c) {
-
+    return new Matrix4(
+      m1.a00 * c, m1.a01 * c, m1.a02 * c, m1.a03 * c,
+      m1.a10 * c, m1.a11 * c, m1.a12 * c, m1.a13 * c,
+      m1.a20 * c, m1.a21 * c, m1.a22 * c, m1.a23 * c,
+      m1.a30 * c, m1.a31 * c, m1.a32 * c, m1.a33 * c
+    );
   }
 
   /**
@@ -743,7 +875,12 @@ class Matrix4 {
    * @return {Vector4}
    */
   multiplyVector(v) {
+    const x = this.a00 * v.x + this.a01 * v.y + this.a02 * v.z + this.a03 * v.w;
+    const y = this.a10 * v.x + this.a11 * v.y + this.a12 * v.z + this.a13 * v.w;
+    const z = this.a20 * v.x + this.a21 * v.y + this.a22 * v.z + this.a23 * v.w;
+    const w = this.a30 * v.x + this.a31 * v.y + this.a32 * v.z + this.a33 * v.w;
 
+    return new Vector4(x, y, z, w);
   }
 
   /**
@@ -757,7 +894,12 @@ class Matrix4 {
    * @return {Matrix4}
    */
   static orthographic(left, right, bottom, top, near, far) {
-
+    return new Matrix4(
+      2/(right-left), 0,       0,       -(right+left)/(right-left),
+      0,       2/(top-bottom), 0,       -(top+bottom)/(top-bottom),
+      0,       0,       2/(near-far),  (far+near)/(near-far),
+      0,       0,       0,        1
+    );
   }
 
   /**
@@ -769,7 +911,14 @@ class Matrix4 {
    * @return {Matrix4}
    */
   static perspective(fovy, aspect, near, far) {
+    const c = 1 / Math.tan(fovy/2);
 
+    return new Matrix4(
+      c/aspect, 0,  0,            0,
+      0,        c,  0,            0,
+      0,        0, -(far+near)/(far-near), -(2*near*far)/(far-near),
+      0,        0, -1,            0
+    );
   }
 
   /**
@@ -778,7 +927,15 @@ class Matrix4 {
    * @return {Matrix4}
    */
   static rotateX(theta) {
+    const c = Math.cos(theta);
+    const s = Math.cos(theta);
 
+    return new Matrix4(
+      1, 0,  0, 0,
+      0, c, -s, 0,
+      0, s,  c, 0,
+      0, 0,  0, 1
+    );
   }
 
   /**
@@ -787,7 +944,15 @@ class Matrix4 {
    * @return {Matrix4}
    */
   static rotateY(theta) {
+    const c = Math.cos(theta);
+    const s = Math.sin(theta);
 
+    return new Matrix4(
+      c, 0, s, 0,
+      0, 1, 0, 0,
+     -s, 0, c, 0,
+      0, 0, 0, 1
+    );
   }
 
   /**
@@ -796,7 +961,15 @@ class Matrix4 {
    * @return {Matrix4}
    */
   static rotateZ(theta) {
+    const c = Math.cos(theta);
+    const s = Math.sin(theta);
 
+    return new Matrix4(
+      c, -s, 0, 0,
+      s,  c, 0, 0,
+      0,  0, 1, 0,
+      0,  0, 0, 1
+    )
   }
 
   /**
@@ -805,6 +978,12 @@ class Matrix4 {
    * @return {Matrix4}
    */
   static scale(v) {
+    return new Matrix4(
+      v.x, 0, 0, 0,
+      0, v.y, 0, 0,
+      0, 0, v.z, 0,
+      0, 0, 0 ,  1
+    )
 
   }
 
@@ -833,7 +1012,22 @@ class Matrix4 {
     a20=0, a21=0, a22=0, a23=0, 
     a30=0, a31=0, a32=0, a33=0
   ) {
-
+    this.a00 = a00;
+    this.a01 = a01;
+    this.a02 = a02;
+    this.a03 = a03;
+    this.a10 = a10;
+    this.a11 = a11;
+    this.a12 = a12;
+    this.a13 = a13;
+    this.a20 = a20;
+    this.a21 = a21;
+    this.a22 = a22;
+    this.a23 = a23;
+    this.a30 = a30;
+    this.a31 = a31;
+    this.a32 = a32;
+    this.a33 = a33;
   }
 
   /**
@@ -843,7 +1037,12 @@ class Matrix4 {
    * @return {Matrix4}
    */
   static subtract(m1, m2) {
-
+    return new Matrix4(
+      m1.a00 - m2.a00, m1.a01 - m2.a01, m1.a02 - m2.a02, m1.a03 - m2.a03,
+      m1.a10 - m2.a10, m1.a11 - m2.a11, m1.a12 - m2.a12, m1.a13 - m2.a13,
+      m1.a20 - m2.a20, m1.a21 - m2.a21, m1.a22 - m2.a22, m1.a23 - m2.a23,
+      m1.a30 - m2.a30, m1.a31 - m2.a31, m1.a32 - m2.a32, m1.a33 - m2.a33
+    );
   }
 
   /**
@@ -852,7 +1051,12 @@ class Matrix4 {
    * @return {Matrix4}
    */
   static translate(v) {
-
+    return new Matrix4(
+      1, 0, 0, v.x,
+      0, 1, 0, v.y,
+      0, 0, 1, v.z,
+      0, 0, 0, 1
+    )
   }
 
   /**
@@ -860,6 +1064,11 @@ class Matrix4 {
    * @return {Matrix4}
    */
   transpose() {
-
+    return new Matrix4(
+      this.a00, this.a10, this.a20, this.a30,
+      this.a01, this.a11, this.a21, this.a31,
+      this.a02, this.a12, this.a22, this.a32,
+      this.a03, this.a13, this.a23, this.a33
+    );
   }
 }
