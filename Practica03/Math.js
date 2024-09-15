@@ -452,6 +452,7 @@ class Matrix3 {
  * La clase Vector4 representa vectores de cuadro componentes, x, y, z y w. 
  */
 class Vector4 {
+
   /**
    * @param {Number} x
    * @param {Number} y
@@ -459,7 +460,10 @@ class Vector4 {
    * @param {Number} w
    */
   constructor(x=0, y=0, z=0, w=0) {
-
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    this.w = w;
   }
 
   /**
@@ -469,7 +473,7 @@ class Vector4 {
    * @return {Vector4}
    */
   static add(u, v) {
-
+    return new Vector4(u.x + v.x, u.y + v.y, u.z + v.z, u.w + v.w);
   }
 
   /**
@@ -477,7 +481,7 @@ class Vector4 {
    * @return {Vector4}
    */
   clone() {
-
+    return new Vector4(this.x, this.y, this.z, this.w);
   }
 
   /**
@@ -487,7 +491,12 @@ class Vector4 {
    * @return {Number}
    */
   static distance(u, v) {
+    const dx = u.x - v.x;
+    const dy = u.y - v.y;
+    const dz = u.z - v.z;
+    const dw = u.w - v.w;
 
+    return Math.sqrt(dx*dx + dy*dy + dz*dz + dw*dw);
   }
 
   /**
@@ -497,7 +506,7 @@ class Vector4 {
    * @return {Number}
    */
   static dot(u, v) {
-
+    return u.x*v.x + u.y*v.y + u.z*v.z + u.w*v.w;
   }
 
   /**
@@ -507,7 +516,12 @@ class Vector4 {
    * @return {Boolean}
    */
   static equals(u, v) {
-
+    return (
+      Math.abs(u.x - v.x) < epsilon &&
+      Math.abs(u.y - v.y) < epsilon &&
+      Math.abs(u.z - v.z) < epsilon &&
+      Math.abs(u.w - v.w) < epsilon
+    );
   }
 
   /**
@@ -517,7 +531,7 @@ class Vector4 {
    * @return {Boolean}
    */
   static exactEquals(u, v) {
-
+    return u.x === v.x && u.y === v.y && u.z === v.z && u.w ===v.w;
   }
 
   /**
@@ -525,7 +539,12 @@ class Vector4 {
    * @return {Vector4}
    */
   normalize() {
+    const magnitud = Math.sqrt(this.x*this.x + this.y*this.y + this.z*this.z + this.w*this.w);
 
+    if(magnitud > 0){
+      return new Vector4(this.x/magnitud, this.y/magnitud, this.z/magnitud, this.w/magnitud);
+    }
+    return new Vector4(0,0,0,0);
   }
 
   /**
@@ -536,7 +555,10 @@ class Vector4 {
    * @param {Number} w
    */
   set(x, y, z, w) {
-
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    this.w = w;
   }
 
   /**
@@ -546,7 +568,7 @@ class Vector4 {
    * @return {Vector4}
    */
   static subtract(u, v) {
-
+    return new Vector4(u.x - v.x, u.y - v.y, u.z - v.z, u.w - v.w);
   }
 
   /**
@@ -556,14 +578,17 @@ class Vector4 {
    * @return {Number}
    */
   static squaredDistance(u, v) {
-
+    return this.distance(u,v) * this.distance(u,v);
   }
 
   /**
    * Función que asigna cero a cada componente del vector que invoca la función.
    */
   zero() {
-
+    this.x = 0;
+    this.y = 0;
+    this.z = 0;
+    this.w = 0;
   }
 }
 
