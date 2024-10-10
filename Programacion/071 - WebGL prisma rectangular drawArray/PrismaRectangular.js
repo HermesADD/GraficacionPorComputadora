@@ -139,13 +139,13 @@ class PrismaRectangular {
     gl.drawArrays(gl.LINES, 0, this.num_elements);
     gl.bindVertexArray(null);
 
-    /** 
+     
     // Se dibuja el wireframe del objeto, usando un color negro y la primitiva LINES
     gl.uniform4fv(this.colorUniformLocation, [0,0,0,1]);
     gl.bindVertexArray(this.wireframeVAO);
     gl.drawArrays(gl.LINES, 0, this.num_wireframe_elements);
     gl.bindVertexArray(null);
-    */
+    
   }
 
 

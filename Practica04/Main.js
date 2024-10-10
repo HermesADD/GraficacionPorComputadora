@@ -17,53 +17,53 @@ window.addEventListener("load", function(evt) {
       [0.188, 0.439, 0.333, 1], 
       Matrix4.translate(new Vector3(-5, 0, -5))
     ),
-    new Cono(
-      gl, 
-      2, 4, 16, 16, 
-      [0, 1, 0, 1], 
-      Matrix4.translate(new Vector3(0, 0, -5))
-    ),
-    new Dodecaedro(
-      gl, 
-      1, 
-      [0, 0, 1, 1], 
-      Matrix4.translate(new Vector3(5, 0, -5))
-    ),
-    new Esfera(
-      gl, 
-      2, 16, 16, 
-      [0, 1, 1, 1], 
-      Matrix4.translate(new Vector3(-5, 0, 0))
-    ),
-    new Icosaedro(gl, 
-      1, 
-      [1, 0 , 1, 1], 
-      Matrix4.translate(new Vector3(0, 0, 0))
-    ),
-    new Octaedro(
-      gl, 
-      2, 
-      [1, 1, 0, 1], 
-      Matrix4.translate(new Vector3(5, 0, 0))
-    ),
-    new PrismaRectangular(
-      gl, 
-      2, 3, 4, 
-      [1, 0.2, 0.3, 1], 
-      Matrix4.translate(new Vector3(-5, 0, 5))
-    ),
-    new Tetraedro(
-      gl, 
-      2, 
-      [0.5, 0.5, 0.5, 1], 
-      Matrix4.translate(new Vector3(0, 0, 5))
-    ),
-    new Toroide(
-      gl, 
-      1.5, 0.6, 16, 16, 
-      [0.25, 0.25, 0.25, 1], 
-      Matrix4.translate(new Vector3(5, 0, 5))
-    ),
+    // new Cono(
+    //   gl, 
+    //   2, 4, 16, 16, 
+    //   [0, 1, 0, 1], 
+    //   Matrix4.translate(new Vector3(0, 0, -5))
+    // ),
+    // new Dodecaedro(
+    //   gl, 
+    //   1, 
+    //   [0, 0, 1, 1], 
+    //   Matrix4.translate(new Vector3(5, 0, -5))
+    // ),
+    // new Esfera(
+    //   gl, 
+    //   2, 16, 16, 
+    //   [0, 1, 1, 1], 
+    //   Matrix4.translate(new Vector3(-5, 0, 0))
+    // ),
+    // new Icosaedro(gl, 
+    //   1, 
+    //   [1, 0 , 1, 1], 
+    //   Matrix4.translate(new Vector3(0, 0, 0))
+    // ),
+    // new Octaedro(
+    //   gl, 
+    //   2, 
+    //   [1, 1, 0, 1], 
+    //   Matrix4.translate(new Vector3(5, 0, 0))
+    // ),
+    // new PrismaRectangular(
+    //   gl, 
+    //   2, 3, 4, 
+    //   [1, 0.2, 0.3, 1], 
+    //   Matrix4.translate(new Vector3(-5, 0, 5))
+    // ),
+    // new Tetraedro(
+    //   gl, 
+    //   2, 
+    //   [0.5, 0.5, 0.5, 1], 
+    //   Matrix4.translate(new Vector3(0, 0, 5))
+    // ),
+    // new Toroide(
+    //   gl, 
+    //   1.5, 0.6, 16, 16, 
+    //   [0.25, 0.25, 0.25, 1], 
+    //   Matrix4.translate(new Vector3(5, 0, 5))
+    // ),
   ];
 
   // Se define la posición de la cámara (o el observador o el ojo)
@@ -133,7 +133,7 @@ window.addEventListener("load", function(evt) {
   gl.clearColor(0, 0, 0, 0);
   
   // La función de dibujado
-  function draw(wireframe) {
+  function draw() {
     // Se limpian tanto el buffer de color, como el buffer de profundidad
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
@@ -142,18 +142,12 @@ window.addEventListener("load", function(evt) {
       geometry[i].draw( 
         gl, // referencia al contexto de render de WebGL
         projectionViewMatrix, // la matriz de transformación de la vista y proyección
-        wireframe
       );
     }
   }
 
   // se dibujan los objetos
-  draw()
-
-  let wire_ckbx = document.getElementById("wire_ckbx");
-  wire_ckbx.addEventListener("change", ()=> {
-    draw(wire_ckbx.checked);
-  });
+  draw();
 });
 
 
