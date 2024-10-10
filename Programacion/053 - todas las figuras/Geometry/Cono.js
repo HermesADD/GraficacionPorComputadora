@@ -1,12 +1,11 @@
-class Cilindro {
+class Cono {
   /**
-   * Cilindro
-   * @param {Number} radius el tamaño del cilindro
+   * Cono
+   * @param {Number} radius el tamaño del cono
    * @param {Number} Nu número de particiones en paralelos
    * @param {Number} Nv número de particiones en meridianos
    */
-  constructor(gl, radius=1, height=1, Nu=1, Nv=3, color="#ffffff", transform=identity()) {
-    this.gl = gl;
+  constructor(radius=1, height=1, Nu=1, Nv=3, color="#ffffff", transform=identity()) {
     this.r = radius;
     this.h = height;
     this.Nu = Nu;
@@ -23,18 +22,21 @@ class Cilindro {
     let phi; // la elevación en los paralelos
     let theta; // el ángulo en los meridianos
     
+    // la punta del cono
+    vertices.push({ x: 0, y: this.h/2, z: 0});
+
     // iteración para construir los paralelos
-    for (let i=0; i<this.Nu+2; i++) {
-      phi = i*(this.h/(this.Nu+1));
+    for (let i=0; i<this.Nu+1; i++) {
+      phi = (i+1)*(this.h/(this.Nu+1));
 
       // iteración para construir los meridianos
       for (let j=0; j<this.Nv; j++) {
         theta = j*(2*Math.PI/this.Nv);
 
         vertices.push({ 
-          x: this.r * Math.cos(theta), 
+          x: (phi*this.r)/this.h * Math.cos(theta), 
           y: this.h/2 - phi, 
-          z: this.r * Math.sin(theta) 
+          z: (phi*this.r)/this.h * Math.sin(theta) 
         });
       }
     }
@@ -45,13 +47,22 @@ class Cilindro {
   getFaces() {
     let faces = [];
 
-    for (let i=0; i<this.Nu+1; i++) {
+    // triángulos que utilizan la punta del cono (el vértice 0)
+    for (let i=0; i<this.Nv; i++) {
+      faces.push([
+        0, // indice del polo norte
+        (i%this.Nv)+1,
+        ((i+1)%this.Nv)+1, 
+      ]);
+    }
+
+    for (let i=0; i<this.Nu; i++) {
       for (let j=0; j<this.Nv; j++) {
         faces.push([ 
-          j + i*this.Nv,
-          (j+1)%this.Nv + i*this.Nv,
-          (j+1)%this.Nv + (i+1)*this.Nv,
-          j + (i+1)*this.Nv,
+          j+1 + i*this.Nv,
+          (j+1)%this.Nv +1 + i*this.Nv,
+          (j+1)%this.Nv +1 + (i+1)*this.Nv,
+          j+1 + (i+1)*this.Nv,
         ]);
       }
     }

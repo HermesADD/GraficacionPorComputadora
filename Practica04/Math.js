@@ -785,13 +785,15 @@ class Matrix4 {
   }
 
   /**
-   * Función que asigna los valores de la matriz identidad a la matriz desde donde se invocó la función.
+   * Función que devuelve los valores de la matriz identidad.
    */
-  identity() {
-    this.a00 = 1; this.a01 = 0; this.a02 = 0; this.a03 = 0;
-    this.a10 = 0; this.a11 = 1; this.a12 = 0; this.a13 = 0;
-    this.a20 = 0; this.a21 = 0; this.a22 = 1; this.a23 = 0;
-    this.a30 = 0; this.a31 = 0; this.a32 = 1; this.a33 = 0;
+  static identity() {
+    return [
+      1, 0, 0, 0,
+      0, 1, 0, 0,
+      0, 0, 1, 0,
+      0, 0, 0, 1
+    ];
   }
 
   /**
