@@ -11,7 +11,6 @@ class PrismaRectangular {
     this.vertices = this.getVertices();
     this.faces = this.getFaces();
 
-
     let vertexShaderSource =
     `#version 300 es
     in vec4 a_position;

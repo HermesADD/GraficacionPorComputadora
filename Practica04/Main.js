@@ -23,29 +23,29 @@ window.addEventListener("load", function(evt) {
       [0, 1, 0, 1], 
       Matrix4.translate(new Vector3(0, 0, -5))
     ),
-    // new Dodecaedro(
-    //   gl, 
-    //   1, 
-    //   [0, 0, 1, 1], 
-    //   Matrix4.translate(new Vector3(5, 0, -5))
-    // ),
-    // new Esfera(
-    //   gl, 
-    //   2, 16, 16, 
-    //   [0, 1, 1, 1], 
-    //   Matrix4.translate(new Vector3(-5, 0, 0))
-    // ),
+    new Dodecaedro(
+      gl, 
+      1, 
+      [0, 0, 1, 1], 
+      Matrix4.translate(new Vector3(5, 0, -5))
+    ),
+    new Esfera(
+      gl, 
+      2, 16, 16, 
+      [0, 1, 1, 1], 
+      Matrix4.translate(new Vector3(-5, 0, 0))
+    ),
     new Icosaedro(gl, 
       1, 
       [1, 0 , 1, 1], 
       Matrix4.translate(new Vector3(0, 0, 0))
     ),
-    // new Octaedro(
-    //   gl, 
-    //   2, 
-    //   [1, 1, 0, 1], 
-    //   Matrix4.translate(new Vector3(5, 0, 0))
-    // ),
+    new Octaedro(
+      gl, 
+      2, 
+      [1, 1, 0, 1], 
+      Matrix4.translate(new Vector3(5, 0, 0))
+    ),
     new PrismaRectangular(
       gl, 
       2, 3, 4, 
@@ -58,12 +58,12 @@ window.addEventListener("load", function(evt) {
       [0.5, 0.5, 0.5, 1], 
       Matrix4.translate(new Vector3(0, 0, 5))
     ),
-    // new Toroide(
-    //   gl, 
-    //   1.5, 0.6, 16, 16, 
-    //   [0.25, 0.25, 0.25, 1], 
-    //   Matrix4.translate(new Vector3(5, 0, 5))
-    // ),
+    new Toroide(
+      gl, 
+      1.5, 0.6, 16, 16, 
+      [0.25, 0.25, 0.25, 1], 
+      Matrix4.translate(new Vector3(5, 0, 5))
+    ),
   ];
 
   // Se define la posición de la cámara (o el observador o el ojo)
@@ -147,9 +147,12 @@ window.addEventListener("load", function(evt) {
     }
   }
 
-  // se dibujan los objetos
-  draw(false);//Esto nos servira para modificar el dibujo dependiendo de si lo quiere cn wireframe o no
-  //Si es true entonces se dibujara el wireframe si es false no.
+  draw()
+
+  let wire_ckbx = document.getElementById("wire_ckbx");
+  wire_ckbx.addEventListener("change", ()=> {
+    draw(wire_ckbx.checked);
+  });
 });
 
 
