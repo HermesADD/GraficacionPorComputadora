@@ -17,12 +17,12 @@ window.addEventListener("load", function(evt) {
       [0.188, 0.439, 0.333, 1], 
       Matrix4.translate(new Vector3(-5, 0, -5))
     ),
-    new Cono(
-      gl, 
-      2, 4, 16, 16, 
-      [0, 1, 0, 1], 
-      Matrix4.translate(new Vector3(0, 0, -5))
-    ),
+    // new Cono(
+    //   gl, 
+    //   2, 4, 16, 16, 
+    //   [0, 1, 0, 1], 
+    //   Matrix4.translate(new Vector3(0, 0, -5))
+    // ),
     // new Dodecaedro(
     //   gl, 
     //   1, 
@@ -35,29 +35,29 @@ window.addEventListener("load", function(evt) {
     //   [0, 1, 1, 1], 
     //   Matrix4.translate(new Vector3(-5, 0, 0))
     // ),
-    new Icosaedro(gl, 
-      1, 
-      [1, 0 , 1, 1], 
-      Matrix4.translate(new Vector3(0, 0, 0))
-    ),
+    // new Icosaedro(gl, 
+    //   1, 
+    //   [1, 0 , 1, 1], 
+    //   Matrix4.translate(new Vector3(0, 0, 0))
+    // ),
     // new Octaedro(
     //   gl, 
     //   2, 
     //   [1, 1, 0, 1], 
     //   Matrix4.translate(new Vector3(5, 0, 0))
     // ),
-    new PrismaRectangular(
-      gl, 
-      2, 3, 4, 
-      [1, 0.2, 0.3, 1], 
-      Matrix4.translate(new Vector3(-5, 0, 5))
-    ), 
-    new Tetraedro(
-      gl, 
-      2, 
-      [0.5, 0.5, 0.5, 1], 
-      Matrix4.translate(new Vector3(0, 0, 5))
-    ),
+    // new PrismaRectangular(
+    //   gl, 
+    //   2, 3, 4, 
+    //   [1, 0.2, 0.3, 1], 
+    //   Matrix4.translate(new Vector3(-5, 0, 5))
+    // ),
+    // new Tetraedro(
+    //   gl, 
+    //   2, 
+    //   [0.5, 0.5, 0.5, 1], 
+    //   Matrix4.translate(new Vector3(0, 0, 5))
+    // ),
     // new Toroide(
     //   gl, 
     //   1.5, 0.6, 16, 16, 
@@ -133,7 +133,7 @@ window.addEventListener("load", function(evt) {
   gl.clearColor(0, 0, 0, 0);
   
   // La función de dibujado
-  function draw(wireframe) {
+  function draw() {
     // Se limpian tanto el buffer de color, como el buffer de profundidad
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
@@ -141,15 +141,13 @@ window.addEventListener("load", function(evt) {
     for (let i=0; i<geometry.length; i++) {
       geometry[i].draw( 
         gl, // referencia al contexto de render de WebGL
-        projectionViewMatrix,
-        wireframe // la matriz de transformación de la vista y proyección
+        projectionViewMatrix, // la matriz de transformación de la vista y proyección
       );
     }
   }
 
   // se dibujan los objetos
-  draw(false);//Esto nos servira para modificar el dibujo dependiendo de si lo quiere cn wireframe o no
-  //Si es true entonces se dibujara el wireframe si es false no.
+  draw();
 });
 
 

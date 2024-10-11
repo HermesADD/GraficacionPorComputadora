@@ -71,7 +71,7 @@ class PrismaRectangular {
   /**
    * 
    */
-  draw(gl, projectionViewMatrix,wireframe) {
+  draw(gl, projectionViewMatrix, wireframe) {
     gl.useProgram(this.program);
 
     let projectionViewModelMatrix = Matrix4.multiply(projectionViewMatrix, this.transform);
