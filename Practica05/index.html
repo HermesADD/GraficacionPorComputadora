@@ -3,10 +3,13 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Práctica 04</title>
+  <title>Práctica 05</title>
 
   <script src="Math.js"></script>
 
+  <!-- GenericGeometry se debe iniciar o cargar primero en html para que funciones -->
+   <!-- Las clases padres se inicializan antes de las que heredan  -->
+  <script src="Geometry/GenericGeometry.js"></script>
   <script src="Geometry/Cilindro.js"></script> 
   <script src="Geometry/Cono.js"></script>
   <script src="Geometry/Dodecaedro.js"></script>
@@ -22,7 +25,7 @@
 
 <body>
   <canvas id="the_canvas" width="800" height="600" style="background:#dfe6e9"></canvas>
-
+  <br>
   <input type="checkbox" id="wire_ckbx"><label for="wire_ckbx">Wireframe</label>
 </body>
 

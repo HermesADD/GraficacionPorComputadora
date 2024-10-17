@@ -56,8 +56,8 @@ window.addEventListener("load", function(evt) {
       gl, 
       2, 
       [0.5, 0.5, 0.5, 1], 
-      Matrix4.translate(new Vector3(0, 0, 5))
-    ),
+       Matrix4.translate(new Vector3(0, 0, 5))
+      ),
     new Toroide(
       gl, 
       1.5, 0.6, 16, 16, 

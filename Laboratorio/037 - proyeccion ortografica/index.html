@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Page Title</title>
+  <link rel="stylesheet" href="style.css" type="text/css">
+  <script type="text/javascript" src="Math.js"></script>
+  <script type="text/javascript" src="Camera.js"></script>
+  <script type="text/javascript" src="Main.js"></script>
+</head>
+
+<body>
+  <canvas id="the_canvas" width="800" height="600"></canvas><br>
+
+  <form>
+    <fieldset>
+      <legend>Posición de la cámara</legend>
+      <input type="number" id="cam_x" value="0" step="0.1" min="-5" max="5"><br>
+      <input type="number" id="cam_y" value="0" step="0.1" min="-5" max="5"><br>
+      <input type="number" id="cam_z" value="0" step="0.1" min="-5" max="5">
+    </fieldset>
+  </form>
+
+  <form>
+    <fieldset>
+      <legend>Posición del objetivo o centro de interés</legend>
+      <input type="number" id="coi_x" value="0" step="0.1" min="-5" max="5"><br>
+      <input type="number" id="coi_y" value="0" step="0.1" min="-5" max="5"><br>
+      <input type="number" id="coi_z" value="0" step="0.1" min="-5" max="5">
+    </fieldset>
+  </form>
+</body>
+
+</html>
