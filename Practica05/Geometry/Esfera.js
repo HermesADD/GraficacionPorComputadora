@@ -157,7 +157,7 @@ class Esfera {
         1 + (this.Nu - 1) * this.Nv + (i + 1) % this.Nv // siguiente vértice del último paralelo
       );
     }
-      
+  
     return faces;
   }
 }

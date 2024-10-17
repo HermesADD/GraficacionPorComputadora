@@ -1,14 +1,10 @@
-class Esfera {
+class PrismaRectangular {
   /**
-   * Esfera
-   * @param {Number} radius el tamaño del esfera
-   * @param {Number} Nu número de particiones en paralelos
-   * @param {Number} Nv número de particiones en meridianos
    */
-  constructor(gl, radius=1, Nu=8, Nv=8, color="#ffffff", transform=identity()) {
-    this.r = radius;
-    this.Nu = Nu;
-    this.Nv = Nv;
+  constructor(gl, width=1, height=1, length=1, color="#ffffff", transform=Matrix4.identity()) {
+    this.w = width;
+    this.h = height;
+    this.l = length;
     this.color = color;
 
     this.transform = transform;
@@ -68,8 +64,12 @@ class Esfera {
     this.num_elements = this.faces.length;
 
     this.theta = 0;
+
   }
 
+  /**
+   * 
+   */
   draw(gl, projectionViewMatrix, wireframe) {
     gl.useProgram(this.program);
 
@@ -80,7 +80,7 @@ class Esfera {
       gl.uniform4fv(this.colorUniformLocation, this.color);
 
       gl.bindVertexArray(this.shapeVAO);
-      gl.drawElements(gl.TRIANGLE_FAN, this.num_elements, gl.UNSIGNED_SHORT, 0);
+      gl.drawElements(gl.TRIANGLES, this.num_elements, gl.UNSIGNED_SHORT, 0);
       gl.bindVertexArray(null);
     }else{
       gl.uniformMatrix4fv(this.PVM_matrixLocation, true, projectionViewModelMatrix.toArray());
@@ -92,72 +92,44 @@ class Esfera {
     }
   }
 
+  /**
+   * 
+   */
   getVertices() {
-    let vertices = [];
-    let phi; // la elevación en los paralelos
-    let theta; // el ángulo en los meridianos
-    
-    // el polo norte de la esfera
-    vertices.push( 0, this.r, 0);
-
-    // iteración para construir los paralelos
-    for (let i=0; i<this.Nu; i++) {
-      phi = Math.PI/2 - (i+1)*(Math.PI/(this.Nu+1));
-
-      // iteración para construir los meridianos
-      for (let j=0; j<this.Nv; j++) {
-        theta = j*(2*Math.PI/this.Nv);
-
-        vertices.push( 
-          this.r * Math.cos(phi) * Math.cos(theta), 
-          this.r * Math.sin(phi), 
-          this.r * Math.cos(phi) * Math.sin(theta) 
-        );
-      }
-    }
-
-    // el polo sur de la esfera
-    vertices.push(0, -this.r, 0);
-
-    return vertices;
+    return [
+       this.w/2,  this.h/2,  this.l/2,
+       this.w/2, -this.h/2,  this.l/2,
+       this.w/2,  this.h/2, -this.l/2,
+       this.w/2, -this.h/2, -this.l/2,
+      -this.w/2,  this.h/2,  this.l/2,
+      -this.w/2, -this.h/2,  this.l/2,
+      -this.w/2,  this.h/2, -this.l/2,
+      -this.w/2, -this.h/2, -this.l/2,
+    ];
   }
 
+  /**
+   * En comparación con los ejemplos anteriores, los cuadriláteros que definen el prisma deben triangularse, es decir, partirse en dos triángulos para poder dibujarlos con WebGL
+   */
   getFaces() {
-    let faces = [];
+    return [
+      2, 3, 1,
+      2, 1, 0,
 
-    // triángulos que utilizan el polo norte (el vértice 0)
-    for (let i=0; i<this.Nv; i++) {
-      faces.push(
-        0, // indice del polo norte
-        (i%this.Nv)+1,
-        ((i+1)%this.Nv)+1, 
-      );
-    }
+      1, 5, 4,
+      1, 4, 0,
 
-    for (let i=0; i<this.Nu-1; i++) {
-      for (let j=0; j<this.Nv; j++) {
-        let v1 = j+1 + i*this.Nv;
-        let v2 = (j+1)%this.Nv +1 + i*this.Nv;
-        let v3 = (j+1)%this.Nv +1 + (i+1)*this.Nv;
-        let v4 = j+1 + (i+1)*this.Nv;
+      5, 7, 6,
+      5, 6, 4,
 
-        // Dividimos el cuadrado en dos triángulos (sin cruzarlos)
-        faces.push(v1, v2, v3);  // Primer triángulo
-        faces.push(v2, v3, v4);  // Segundo triángulo
-      }
-    }
+      6, 7, 3,
+      6, 3, 2,
 
-    // triángulos que utilizan el polo sur (el vértice en la posición vertices.length-1)
-    let southPoleIndex = this.vertices.length / 3 - 1;  // Ajustamos el índice del polo sur
+      4, 6, 2,
+      4, 2, 0,
 
-    for (let i = 0; i < this.Nv; i++) {
-      faces.push(
-        southPoleIndex, // índice del polo sur
-        1 + (this.Nu - 1) * this.Nv + i, // último paralelo
-        1 + (this.Nu - 1) * this.Nv + (i + 1) % this.Nv // siguiente vértice del último paralelo
-      );
-    }
-      
-    return faces;
+      3, 7, 5,
+      3, 5, 1,
+    ];
   }
 }
