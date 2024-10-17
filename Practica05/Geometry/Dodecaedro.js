@@ -5,9 +5,8 @@ class Dodecaedro extends GenericGeometry{
    */
   constructor(gl, width=1, color="#ffffff", transform=identity()) {
     super(gl,color,transform);
-    this.w = width;
-    this.vertices = this.getVertices();
-    this.faces = this.getFaces();
+    this.w = width
+    
 
     this.init(gl);
   }
