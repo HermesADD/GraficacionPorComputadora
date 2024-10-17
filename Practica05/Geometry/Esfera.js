@@ -71,13 +71,12 @@ class Esfera extends GenericGeometry{
     }
 
     // triángulos que utilizan el polo sur (el vértice en la posición vertices.length-1)
-    let southPoleIndex = this.vertices.length / 3 - 1;  // Ajustamos el índice del polo sur
-
-    for (let i = 0; i < this.Nv; i++) {
+    // triángulos que utilizan el polo sur (el vértice en la posición vertices.length-1)
+    for (let i=0; i<this.Nv; i++) {
       faces.push(
-        southPoleIndex, // índice del polo sur
-        1 + (this.Nu - 1) * this.Nv + i, // último paralelo
-        1 + (this.Nu - 1) * this.Nv + (i + 1) % this.Nv // siguiente vértice del último paralelo
+        this.vertices.length/3-1, // el indice del polo sur
+        this.vertices.length/3-1-this.Nv +i, 
+        this.vertices.length/3-1-this.Nv +((i+1)%this.Nv)
       );
     }
   
