@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Práctica 05</title>
+
+  <script src="Math.js"></script>
+
+  <!-- GenericGeometry se debe iniciar o cargar primero en html para que funciones -->
+   <!-- Las clases padres se inicializan antes de las que heredan  -->
+  <script src="materials/Material.js"></script>
+  <script src="materials/FlatMaterial.js"></script>
+  <script src="materials/PhongMaterial.js"></script>
+  <script src="materials/AmbientDiffuseMaterial.js"></script>
+  <script src="materials/BlinnPhongMaterial.js"></script>
+
+  <script src="geometry/GenericGeometry.js"></script>
+  <script src="geometry/Cilindro.js"></script> 
+  <script src="geometry/Cono.js"></script>
+  <script src="geometry/Dodecaedro.js"></script>
+  <script src="geometry/Esfera.js"></script>
+  <script src="geometry/Icosaedro.js"></script>
+  <script src="geometry/Octaedro.js"></script>
+  <script src="geometry/PrismaRectangular.js"></script>
+  <script src="geometry/Tetraedro.js"></script>
+  <script src="geometry/Toroide.js"></script>
+
+  <script src="Main.js"></script>
+</head>
+
+<body>
+  <canvas id="the_canvas" width="800" height="600" style="background:#dfe6e9"></canvas>
+  <br>
+  <input type="checkbox" id="blinn_ckbx"><label for="blinn_ckbx">Modelo de iluminación de Blinn-Phong</label>
+</body>
+
+</html>
