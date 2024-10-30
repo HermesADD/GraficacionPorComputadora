@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Page Title</title>
+  <link rel="stylesheet" href="style.css" type="text/css">
+
+  <script type="text/javascript" src="utils/Utils.js"></script>
+  <script type="text/javascript" src="utils/OrbitCamera.js"></script>
+  <script type="text/javascript" src="utils/Math.js"></script>
+  <script type="text/javascript" src="LuzDirecional.js"></script>
+
+  <script type="text/javascript" src="materials/Material.js"></script>
+  <script type="text/javascript" src="materials/PhongMaterial.js"></script>
+
+  <script type="text/javascript" src="geometry/GenericGeometry.js"></script>
+  <script type="text/javascript" src="geometry/Teapot.js"></script>
+
+  <script type="text/javascript" src="Main.js"></script>
+</head>
+
+<body>
+  <div style="position:relative">
+    <canvas id="the_canvas" width="800" height="600"></canvas>
+    <div style="position:absolute; top:10px; left:10px">
+      <!-- con select se crea un menú de opciones -->
+      <select id="material_select" style="width:200px; height:40px; font-size:20px;">
+        <option value="0" selected>Latón</option>
+        <option value="1">Bronce</option>
+        <option value="2">Bronce pulido</option>
+        <option value="3">Cromo</option>
+        <option value="4">Cobre</option>
+        <option value="5">Cobre pulido</option>
+        <option value="6">Oro</option>
+        <option value="7">Oro pulido</option>
+        <option value="8">Estaño</option>
+        <option value="9">Plata</option>
+        <option value="10">Plata pulida</option>
+        <option value="11">Esmeralda</option>
+        <option value="12">Jade</option>
+        <option value="13">Obsidiana</option>
+        <option value="14">Perla</option>
+        <option value="15">Ruby</option>
+        <option value="16">Turquesa</option>
+        <option value="17">Plástico negro</option>
+        <option value="18">Plástico cyan</option>
+        <option value="19">Plástico verde</option>
+        <option value="20">Plástico rojo</option>
+        <option value="21">Plástico blanco</option>
+        <option value="22">Plástico amarillo</option>
+        <option value="23">Hule negro</option>
+        <option value="24">Hule cyan</option>
+        <option value="25">Hule verde</option>
+        <option value="26">Hule rojo</option>
+        <option value="27">Hule blanco</option>
+        <option value="28">Hule amarillo</option>
+      </select>
+    </div>
+  </div>
+</body>
+
+</html>
