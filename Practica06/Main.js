@@ -9,21 +9,28 @@ window.addEventListener("load", async function(evt) {
 
   let texEsfera = await loadImage("texturas/esfera.png");
   let texIcosaedro = await loadImage("texturas/icosaedro.png");
+  let texDodecaedro = await loadImage("texturas/dodecaedro.png");
+  let texCilindro = await loadImage("texturas/cilindro.png");
+  let texCono = await loadImage("texturas/cono.png");
+  let texOctaedro = await loadImage("texturas/octaedro.png");
+  let texPrismaRectangular = await loadImage("texturas/prisma_rectangular.png");
+  let texTetraedro = await loadImage("texturas/tetraedro.png");
+  let texToroide = await loadImage("texturas/toroide.png");
 
 
   let geometry = [
-    // new Cilindro(
-    //   gl, 
-    //   2, 4, 16, 16, 
-    //   new TextureMaterial(gl, texCilindro),
-    //   Matrix4.translate(new Vector3(-5, 0, -5))
-    // ),
-    // new Cono(
-    //   gl, 
-    //   2, 4, 16, 16, 
-    //   new TextureMaterial(gl, texCono),
-    //   Matrix4.translate(new Vector3(0, 0, -5))
-    // ),
+    new Cilindro(
+      gl, 
+      2, 4, 16, 16, 
+      new TextureMaterial(gl, texCilindro),
+      Matrix4.translate(new Vector3(-5, 0, -5))
+    ),
+    new Cono(
+      gl, 
+      2, 4, 16, 16, 
+      new TextureMaterial(gl, texCono),
+      Matrix4.translate(new Vector3(0, 0, -5))
+    ),
     // new Dodecaedro(
     //   gl, 
     //   1, 
@@ -47,27 +54,27 @@ window.addEventListener("load", async function(evt) {
     //   new TextureMaterial(gl, texOctaedro), 
     //   Matrix4.translate(new Vector3(5, 0, 0))
     // ),
-    // new PrismaRectangular(
-    //   gl, 
-    //   2, 3, 4, 
-    //   new TextureMaterial(gl, texPrismaRectangular),
-    //   Matrix4.translate(new Vector3(-5, 0, 5))
-    // ),
+    new PrismaRectangular(
+      gl, 
+      2, 3, 4, 
+      new TextureMaterial(gl, texPrismaRectangular),
+      Matrix4.translate(new Vector3(-5, 0, 5))
+    ),
     // new Tetraedro(
     //   gl, 
     //   2, 
     //   new TextureMaterial(gl, texTetraedro),
     //   Matrix4.translate(new Vector3(0, 0, 5))
     // ),
-    // new Toroide(
-    //   gl, 
-    //   1.5, 0.6, 16, 16, 
-    //   new TextureMaterial(gl, texToroide),
-    //   Matrix4.translate(new Vector3(5, 0, 5))
-    // ),
+    new Toroide(
+      gl, 
+      1.5, 0.6, 16, 16, 
+      new TextureMaterial(gl, texToroide),
+      Matrix4.translate(new Vector3(5, 0, 5))
+    ),
   ];
 
-  let camera = new Camera(
+  let camera = new OrbitCamera(
     new Vector3(0, 10, 7),
     new Vector3(0, -2, 0),
     new Vector3(0, 1, 0),
@@ -80,6 +87,7 @@ window.addEventListener("load", async function(evt) {
   gl.enable(gl.DEPTH_TEST);
   gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
   gl.clearColor(0, 0, 0, 0);
+
   
   function draw() {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -107,4 +115,6 @@ window.addEventListener("load", async function(evt) {
   }
 
   draw();
+
+  camera.registerMouseEvents(gl.canvas,draw);
 });

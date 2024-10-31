@@ -1,83 +1,57 @@
-class Esfera extends GenericGeometry{
+class Toroide extends GenericGeometry{
   /**
+   * Toroide
+   * @param {Number} major_radius el radio mayor del toroide
+   * @param {Number} major_radius el radio menor del toroide
+   * @param {Number} Nu número de particiones en paralelos
+   * @param {Number} Nv número de particiones en meridianos
    */
-  constructor(gl, radius=1, Nu=8, Nv=8, material=new FlatMaterial(gl), transform=identity()) {
+  constructor(gl, major_radius=1, minor_radius=1, Nu=1, Nv=3,material = new FlatMaterial(gl), transform=identity()) {
     super(gl,material,transform);
-
-    this.r = radius;
+    
+    this.R = major_radius;
+    this.r = minor_radius;
     this.Nu = Nu;
     this.Nv = Nv;
 
     this.init(gl);
   }
 
-  /**
-   */
   getVertices() {
     let vertices = [];
-    let phi;
-    let theta;
-    
-    vertices.push(0, this.r, 0);
 
-    for (let i=0; i<this.Nu; i++) {
-      phi = Math.PI/2 - (i+1)*(Math.PI/(this.Nu+1));
-
-      for (let j=0; j<this.Nv; j++) {
-        theta = j*(2*Math.PI/this.Nv);
-
+    for (let i=0; i<this.Nv+1; i++) {
+      for (let j=0; j<this.Nu; j++) {
         vertices.push(
-          this.r * Math.cos(phi) * Math.cos(theta), 
-          this.r * Math.sin(phi), 
-          this.r * Math.cos(phi) * Math.sin(theta) 
+          -(this.R + this.r * Math.sin(2*Math.PI*j/this.Nu)) * Math.sin(2*Math.PI*i/this.Nv),
+            this.r * Math.cos(2*Math.PI*j/this.Nu),
+           (this.R + this.r * Math.sin(2*Math.PI*j/this.Nu)) * Math.cos(2*Math.PI*i/this.Nv),
         );
       }
     }
-
-    vertices.push(0, -this.r, 0);
 
     return vertices;
   }
 
-  /**
-   */
   getFaces() {
     let faces = [];
 
     for (let i=0; i<this.Nv; i++) {
-      faces.push(
-        0,
-        ((i+1)%this.Nv)+1, 
-        (i%this.Nv)+1,
-      );
-    }
-
-    for (let i=0; i<this.Nu-1; i++) {
-      for (let j=0; j<this.Nv; j++) {
-        faces.push( 
-          j+1 + i*this.Nv,
-          (j+1)%this.Nv +1 + i*this.Nv,
-          (j+1)%this.Nv +1 + (i+1)*this.Nv,
-          j+1 + i*this.Nv,
-          (j+1)%this.Nv +1 + (i+1)*this.Nv,
-          j+1 + (i+1)*this.Nv,
-        );
+      for (let j=0; j<this.Nu; j++) {
+        let v1 = j +i*this.Nu;
+        let v2 = j +(i+1)*this.Nu;
+        let v3 = (j+1)%this.Nu +(i+1)*this.Nu;
+        let v4 = (j+1)%this.Nu +i*this.Nu;
+        
+        // Dividimos el cuadrado en dos triángulos (sin cruzarlos)
+        faces.push(v1, v2, v3);  // Primer triángulo
+        faces.push(v1, v3, v4);  // Segundo triángulo
       }
-    }
-
-    for (let i=0; i<this.Nv; i++) {
-      faces.push(
-        this.vertices.length/3-1, 
-        this.vertices.length/3-1 -this.Nv +i, 
-        this.vertices.length/3-1 -this.Nv +((i+1)%this.Nv)
-      );
     }
   
     return faces;
   }
 
-  /**
-   */
   getUVCoordinates(vertices, isFlat) {
     let uv = [];
     let PI2 = Math.PI*2;
@@ -143,5 +117,4 @@ class Esfera extends GenericGeometry{
 
     return uv;
   }
-
 }
