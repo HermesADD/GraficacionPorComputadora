@@ -31,12 +31,12 @@ window.addEventListener("load", async function(evt) {
       new TextureMaterial(gl, texCono),
       Matrix4.translate(new Vector3(0, 0, -5))
     ),
-    // new Dodecaedro(
-    //   gl, 
-    //   1, 
-    //   new TextureMaterial(gl, texDodecaedro),
-    //   Matrix4.translate(new Vector3(5, 0, -5))
-    // ),
+    new Dodecaedro(
+      gl, 
+      1, 
+      new FlatMaterial(gl),
+      Matrix4.translate(new Vector3(5, 0, -5))
+    ),
     new Esfera(
       gl, 
       2, 16, 16, 
@@ -48,24 +48,24 @@ window.addEventListener("load", async function(evt) {
       new TextureMaterial(gl, texIcosaedro), 
       Matrix4.translate(new Vector3(0, 0, 0))
     ),
-    // new Octaedro(
-    //   gl, 
-    //   2, 
-    //   new TextureMaterial(gl, texOctaedro), 
-    //   Matrix4.translate(new Vector3(5, 0, 0))
-    // ),
+    new Octaedro(
+      gl, 
+      2,
+      new FlatMaterial(gl),  
+      Matrix4.translate(new Vector3(5, 0, 0))
+    ),
     new PrismaRectangular(
       gl, 
       2, 3, 4, 
       new TextureMaterial(gl, texPrismaRectangular),
       Matrix4.translate(new Vector3(-5, 0, 5))
     ),
-    // new Tetraedro(
-    //   gl, 
-    //   2, 
-    //   new TextureMaterial(gl, texTetraedro),
-    //   Matrix4.translate(new Vector3(0, 0, 5))
-    // ),
+    new Tetraedro(
+      gl, 
+      2, 
+      new FlatMaterial(gl),
+      Matrix4.translate(new Vector3(0, 0, 5))
+    ),
     new Toroide(
       gl, 
       1.5, 0.6, 16, 16, 

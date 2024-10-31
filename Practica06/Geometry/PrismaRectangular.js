@@ -57,6 +57,7 @@ class PrismaRectangular extends GenericGeometry{
       2, 7, 6
     ];
   }
+  
   getUVCoordinates() {
     this.uv = [
       0.5,  0.625, 
