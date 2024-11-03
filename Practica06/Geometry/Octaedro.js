@@ -34,4 +34,9 @@ class Octaedro extends GenericGeometry{
       5, 4, 2   // Ajustado
     ];
   }
+  
+  getUVCoordinates(){
+    this.uv=[];
+    return this.uv; 
+  }
 }

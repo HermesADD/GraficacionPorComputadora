@@ -67,5 +67,10 @@ class Dodecaedro extends GenericGeometry{
 
     return triangles;
   }
+
+  getUVCoordinates(){
+    this.uv=[];
+    return this.uv; 
+  }
   
 }
