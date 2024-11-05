@@ -69,7 +69,133 @@ class Dodecaedro extends GenericGeometry{
   }
 
   getUVCoordinates(){
-    this.uv=[];
+    let img_w=1030;
+    let img_h=512;
+
+    this.uv=[
+      170/img_w,90/img_h,
+      170/img_w,90/img_h,
+      170/img_w,90/img_h,
+      170/img_w,90/img_h,
+      170/img_w,90/img_h,
+      170/img_w,90/img_h,
+      170/img_w,90/img_h,
+      170/img_w,90/img_h,
+      170/img_w,90/img_h,
+
+      370/img_w,90/img_h,
+      370/img_w,90/img_h,
+      370/img_w,90/img_h,
+      370/img_w,90/img_h,
+      370/img_w,90/img_h,
+      370/img_w,90/img_h,
+      370/img_w,90/img_h,
+      370/img_w,90/img_h,
+      370/img_w,90/img_h,
+
+      262/img_w,230/img_h,
+      262/img_w,230/img_h,
+      262/img_w,230/img_h,
+      262/img_w,230/img_h,
+      262/img_w,230/img_h,
+      262/img_w,230/img_h,
+      262/img_w,230/img_h,
+      262/img_w,230/img_h,
+      262/img_w,230/img_h,
+
+      110/img_w,286/img_h,
+      110/img_w,286/img_h,
+      110/img_w,286/img_h,
+      110/img_w,286/img_h,
+      110/img_w,286/img_h,
+      110/img_w,286/img_h,
+      110/img_w,286/img_h,
+      110/img_w,286/img_h,
+      110/img_w,286/img_h,
+
+      268/img_w,420/img_h,
+      268/img_w,420/img_h,
+      268/img_w,420/img_h,
+      268/img_w,420/img_h,
+      268/img_w,420/img_h,
+      268/img_w,420/img_h,
+      268/img_w,420/img_h,
+      268/img_w,420/img_h,
+      268/img_w,420/img_h,
+
+      430/img_w,285/img_h,
+      430/img_w,285/img_h,
+      430/img_w,285/img_h,
+      430/img_w,285/img_h,
+      430/img_w,285/img_h,
+      430/img_w,285/img_h,
+      430/img_w,285/img_h,
+      430/img_w,285/img_h,
+      430/img_w,285/img_h,
+
+      600/img_w,240/img_h,
+      600/img_w,240/img_h,
+      600/img_w,240/img_h,
+      600/img_w,240/img_h,
+      600/img_w,240/img_h,
+      600/img_w,240/img_h,
+      600/img_w,240/img_h,
+      600/img_w,240/img_h,
+      600/img_w,240/img_h,
+
+
+      750/img_w,280/img_h,
+      750/img_w,280/img_h,
+      750/img_w,280/img_h,
+      750/img_w,280/img_h,
+      750/img_w,280/img_h,
+      750/img_w,280/img_h,
+      750/img_w,280/img_h,
+      750/img_w,280/img_h,
+      750/img_w,280/img_h,
+
+
+      750/img_w,100/img_h,
+      750/img_w,100/img_h,
+      750/img_w,100/img_h,
+      750/img_w,100/img_h,
+      750/img_w,100/img_h,
+      750/img_w,100/img_h,
+      750/img_w,100/img_h,
+      750/img_w,100/img_h,
+      750/img_w,100/img_h,
+
+      925/img_w,225/img_h,
+      925/img_w,225/img_h,
+      925/img_w,225/img_h,
+      925/img_w,225/img_h,
+      925/img_w,225/img_h,
+      925/img_w,225/img_h,
+      925/img_w,225/img_h,
+      925/img_w,225/img_h,
+      925/img_w,225/img_h,
+
+      660/img_w,425/img_h,
+      660/img_w,425/img_h,
+      660/img_w,425/img_h,
+      660/img_w,425/img_h,
+      660/img_w,425/img_h,
+      660/img_w,425/img_h,
+      660/img_w,425/img_h,
+      660/img_w,425/img_h,
+      660/img_w,425/img_h,
+
+      860/img_w,425/img_h,
+      860/img_w,425/img_h,
+      860/img_w,425/img_h,
+      860/img_w,425/img_h,
+      860/img_w,425/img_h,
+      860/img_w,425/img_h,
+      860/img_w,425/img_h,
+      860/img_w,425/img_h,
+      860/img_w,425/img_h,      
+    ];
+
     return this.uv; 
   }
   

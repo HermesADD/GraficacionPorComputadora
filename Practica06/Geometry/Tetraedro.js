@@ -38,26 +38,25 @@ class Tetraedro extends GenericGeometry{
 
   getUVCoordinates(){
 
+    let img_w = 598;
+    let img_h = 512;
+
     this.uv=[
-       // Cara 1: 1, 3, 2 (Atras, FrenteDerecho, FrenteIzquierdo)
-    0.251, 0.587,  // Vértice Atras
-    0.754, 0.587,  // Vértice FrenteDerecho
-    0.503, 0.881,  // Vértice FrenteIzquierdo
+    160/img_w, 100/img_h,
+    160/img_w, 100/img_h,
+    160/img_w, 100/img_h,
 
-    // Cara 2: 0, 1, 2 (Arriba, Atras, FrenteIzquierdo)
-    0.503, 0.098,  // Vértice Arriba
-    0.251, 0.587,  // Vértice Atras
-    0.503, 0.881,  // Vértice FrenteIzquierdo
+    300/img_w, 100/img_h,
+    300/img_w, 100/img_h,
+    300/img_w, 100/img_h,
 
-    // Cara 3: 0, 2, 3 (Arriba, FrenteIzquierdo, FrenteDerecho)
-    0.503, 0.098,  // Vértice Arriba
-    0.503, 0.881,  // Vértice FrenteIzquierdo
-    0.754, 0.587,  // Vértice FrenteDerecho
+    450/img_w, 100/img_h,
+    450/img_w, 100/img_h,
+    450/img_w, 100/img_h,
 
-    // Cara 4: 0, 3, 1 (Arriba, FrenteDerecho, Atras)
-    0.503, 0.098,  // Vértice Arriba
-    0.754, 0.587,  // Vértice FrenteDerecho
-    0.251, 0.587 
+    300/img_w, 360/img_h,
+    300/img_w, 360/img_h,
+    300/img_w, 360/img_h,
     ];
 
     return this.uv;

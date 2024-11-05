@@ -59,48 +59,54 @@ class PrismaRectangular extends GenericGeometry{
   }
   
   getUVCoordinates() {
+    let img_w = 512;
+    let img_h = 512;
+
     this.uv = [
-      0.5,  0.625, 
-      0.5,  0.375, 
-      0.25, 0.375, 
-      0.5,  0.625, 
-      0.25, 0.375, 
-      0.25, 0.625, 
+      //Derecho
+      310/img_w,260/img_h,//Color Azul
+      310/img_w,260/img_h,
+      310/img_w,260/img_h,
+      310/img_w,260/img_h,
+      310/img_w,260/img_h,
+      310/img_w,260/img_h,
 
-      0.75, 0.625, 
-      0.75, 0.375, 
-      0.5,  0.375, 
-      0.75, 0.625, 
-      0.5,  0.375, 
-      0.5,  0.625, 
+      //Frente
+      190/img_w,128/img_h, //Color rojo
+      190/img_w,128/img_h,
+      190/img_w,128/img_h,
+      190/img_w,128/img_h,
+      190/img_w,128/img_h,
+      190/img_w,128/img_h,
 
-      1,    0.625, 
-      1,    0.375, 
-      0.75, 0.375, 
-      1,    0.625, 
-      0.75, 0.375, 
-      0.75, 0.625, 
+      //Izquierdo
+      190/img_w,390/img_h,//Azul claro
+      190/img_w,390/img_h,
+      190/img_w,390/img_h,
+      190/img_w,390/img_h,
+      190/img_w,390/img_h,
+      190/img_w,390/img_h,
 
-      0.25, 0.625, 
-      0.25, 0.375, 
-      0,    0.375, 
-      0.25, 0.625, 
-      0,    0.375, 
-      0,    0.625, 
+      190/img_w,260/img_h,// Color carne
+      190/img_w,260/img_h,
+      190/img_w,260/img_h,
+      190/img_w,260/img_h,
+      190/img_w,260/img_h,
+      190/img_w,260/img_h,
 
-      0.5,  0.375, 
-      0.5,  0.125, 
-      0.25, 0.125, 
-      0.5,  0.375, 
-      0.25, 0.125, 
-      0.25, 0.375, 
+      50/img_w,260/img_h,
+      50/img_w,260/img_h,
+      50/img_w,260/img_h,
+      50/img_w,260/img_h,
+      50/img_w,260/img_h,
+      50/img_w,260/img_h,
 
-      0.5,  0.875, 
-      0.5,  0.625, 
-      0.25, 0.625, 
-      0.5,  0.875, 
-      0.25, 0.625, 
-      0.25, 0.875, 
+      440/img_w,260/img_h,
+      440/img_w,260/img_h,
+      440/img_w,260/img_h,
+      440/img_w,260/img_h,
+      440/img_w,260/img_h,
+      440/img_w,260/img_h,
     ];
   return this.uv;
   }

@@ -34,13 +34,7 @@ window.addEventListener("load", async function(evt) {
     new Dodecaedro(
       gl, 
       1, 
-      new PhongMaterial(
-        gl, 
-        [0.1,0.1,0.1], // Ka
-        [0,0,1], // Kd // el color
-        [1,1,1],
-        5.0, // shininess
-      ),
+      new TextureMaterial(gl,texDodecaedro),
       Matrix4.translate(new Vector3(5, 0, -5))
     ),
     new Esfera(
@@ -57,13 +51,7 @@ window.addEventListener("load", async function(evt) {
     new Octaedro(
       gl, 
       2,
-      new PhongMaterial(
-        gl, 
-        [0.1,0.1,0.1], // Ka
-        [1,1,0], // Kd // el color
-        [1,1,1],
-        5.0, // shininess
-      ),  
+      new TextureMaterial(gl,texOctaedro),  
       Matrix4.translate(new Vector3(5, 0, 0))
     ),
     new PrismaRectangular(
@@ -75,13 +63,7 @@ window.addEventListener("load", async function(evt) {
     new Tetraedro(
       gl, 
       2, 
-      new PhongMaterial(
-        gl, 
-        [0.1,0.1,0.1], // Ka
-        [0.5,0.5,0.5], // Kd // el color
-        [1,1,1],
-        5.0, // shininess
-      ),
+      new TextureMaterial(gl,texTetraedro),
       Matrix4.translate(new Vector3(0, 0, 5))
     ),
     new Toroide(
