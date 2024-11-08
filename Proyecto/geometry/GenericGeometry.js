@@ -1,19 +1,9 @@
-class Esfera {
-  /**
-   */
-  constructor(gl, radius=1, Nu=8, Nv=8, material=new FlatMaterial(gl), transform=identity()) {
+class GenericGeometry{
+  constructor(gl,material,transform){
     this.material = material;
-    this.transform = transform;
-
-    this.r = radius;
-    this.Nu = Nu;
-    this.Nv = Nv;
-
-    this.init(gl);
+    this.transform=transform;
   }
 
-  /**
-  */
   init(gl) {
     this.vertices = this.getVertices();
 
@@ -222,27 +212,27 @@ class Esfera {
       i2 = faces[i+1]*3;
       i3 = faces[i+2]*3;
 
-      v1 = { x: vertices[i1], y: vertices[i1 + 1], z: vertices[i1 + 2] };
-      v2 = { x: vertices[i2], y: vertices[i2 + 1], z:vertices[i2 + 2] };
-      v3 = { x: vertices[i3], y: vertices[i3 + 1], z: vertices[i3 + 2] };
+      v1 = new Vector3(vertices[i1], vertices[i1 + 1], vertices[i1 + 2]);
+      v2 = new Vector3(vertices[i2], vertices[i2 + 1], vertices[i2 + 2]);
+      v3 = new Vector3(vertices[i3], vertices[i3 + 1], vertices[i3 + 2]);
 
       n = (Vector3.cross(Vector3.subtract(v1, v2), Vector3.subtract(v2, v3))).normalize();
 
-      tmp = { x: normals[i1], y: normals[i1+1], z: normals[i1+2] };
+      tmp = new Vector3(normals[i1], normals[i1+1], normals[i1+2]);
       tmp = Vector3.add(tmp, n);
       normals[i1  ] = tmp.x;
       normals[i1+1] = tmp.y;
       normals[i1+2] = tmp.z;
 
 
-      tmp = { x: normals[i2], y: normals[i2+1], z: normals[i2+2] };
+      tmp = new Vector3(normals[i2], normals[i2+1], normals[i2+2]);
       tmp = Vector3.add(tmp, n);
       normals[i2  ] = tmp.x;
       normals[i2+1] = tmp.y;
       normals[i2+2] = tmp.z;
 
 
-      tmp = { x: normals[i3], y: normals[i3+1], z: normals[i3+2] };
+      tmp = new Vector3(normals[i3], normals[i3+1], normals[i3+2]);
       tmp = Vector3.add(tmp, n);
       normals[i3  ] = tmp.x;
       normals[i3+1] = tmp.y;
@@ -290,9 +280,9 @@ class Esfera {
     let n;
 
     for (let i=0; i<vertices.length; i+=9) {
-      v1 = { x: vertices[i  ], y: vertices[i+1], z: vertices[i+2] };
-      v2 = { x: vertices[i+3], y: vertices[i+4], z: vertices[i+5] };
-      v3 = { x: vertices[i+6], y: vertices[i+7], z: vertices[i+8] };
+      v1 = new Vector3(vertices[i  ], vertices[i+1], vertices[i+2]);
+      v2 = new Vector3(vertices[i+3], vertices[i+4], vertices[i+5]);
+      v3 = new Vector3(vertices[i+6], vertices[i+7], vertices[i+8]);
 
       n = (Vector3.cross(Vector3.subtract(v1, v2), Vector3.subtract(v2, v3))).normalize();
 
@@ -305,138 +295,4 @@ class Esfera {
 
     return normals;
   }
-
-  /**
-   */
-  getVertices() {
-    let vertices = [];
-    let phi;
-    let theta;
-    
-    vertices.push(0, this.r, 0);
-
-    for (let i=0; i<this.Nu; i++) {
-      phi = Math.PI/2 - (i+1)*(Math.PI/(this.Nu+1));
-
-      for (let j=0; j<this.Nv; j++) {
-        theta = j*(2*Math.PI/this.Nv);
-
-        vertices.push(
-          this.r * Math.cos(phi) * Math.cos(theta), 
-          this.r * Math.sin(phi), 
-          this.r * Math.cos(phi) * Math.sin(theta) 
-        );
-      }
-    }
-
-    vertices.push(0, -this.r, 0);
-
-    return vertices;
-  }
-
-  /**
-   */
-  getFaces() {
-    let faces = [];
-
-    for (let i=0; i<this.Nv; i++) {
-      faces.push(
-        0,
-        ((i+1)%this.Nv)+1, 
-        (i%this.Nv)+1,
-      );
-    }
-
-    for (let i=0; i<this.Nu-1; i++) {
-      for (let j=0; j<this.Nv; j++) {
-        faces.push( 
-          j+1 + i*this.Nv,
-          (j+1)%this.Nv +1 + i*this.Nv,
-          (j+1)%this.Nv +1 + (i+1)*this.Nv,
-          j+1 + i*this.Nv,
-          (j+1)%this.Nv +1 + (i+1)*this.Nv,
-          j+1 + (i+1)*this.Nv,
-        );
-      }
-    }
-
-    for (let i=0; i<this.Nv; i++) {
-      faces.push(
-        this.vertices.length/3-1, 
-        this.vertices.length/3-1 -this.Nv +i, 
-        this.vertices.length/3-1 -this.Nv +((i+1)%this.Nv)
-      );
-    }
-  
-    return faces;
-  }
-
-  /**
-   */
-  getUVCoordinates(vertices, isFlat) {
-    let uv = [];
-    let PI2 = Math.PI*2;
-
-    if (!isFlat) {
-      let p, u, v;
-
-      for (let i=0, l=vertices.length/3; i<l; i++) {
-        p = new Vector3(vertices[i*3], vertices[i*3 +1], vertices[i*3 +2]).normalize();
-
-        uv.push(
-          0.5 + (Math.atan2(p.z, p.x) / PI2),
-          0.5 + (Math.asin(p.y) / Math.PI)
-        );
-      }
-    }
-    else {
-      let max_dist = 0.75;
-      let p1, p2, p3;
-      let u1, v1, u2, v2, u3, v3;
-
-      for (let i=0; i<vertices.length/3; i+=3) {
-        p1 = new Vector3(vertices[i*3], vertices[i*3 +1], vertices[i*3 +2]).normalize();
-        u1 = 0.5 + (Math.atan2(p1.z, p1.x) / PI2);
-        v1 = 0.5 + (Math.asin(p1.y) / Math.PI);
-
-        p2 = new Vector3(vertices[(i+1)*3], vertices[(i+1)*3 +1], vertices[(i+1)*3 +2]).normalize();
-        u2 = 0.5 + (Math.atan2(p2.z, p2.x) / PI2);
-        v2 = 0.5 + (Math.asin(p2.y) / Math.PI);
-
-        p3 = new Vector3(vertices[(i+2)*3], vertices[(i+2)*3 +1], vertices[(i+2)*3 +2]).normalize();
-        u3 = 0.5 + (Math.atan2(p3.z, p3.x) / PI2);
-        v3 = 0.5 + (Math.asin(p3.y) / Math.PI);
-
-        if (Math.abs(u1-u2) > max_dist) {
-          if (u1 > u2) {
-            u2 = 1 + u2;
-          }
-          else {
-            u1 = 1 + u1;
-          }
-        }
-        if (Math.abs(u1-u3) > max_dist) {
-          if (u1 > u3) {
-            u3 = 1 + u3;
-          }
-          else {
-            u1 = 1 + u1;
-          }
-        }
-        if (Math.abs(u2-u3) > max_dist) {
-          if (u2 > u3) {
-            u3 = 1 + u3;
-          }
-          else {
-            u2 = 1 + u2;
-          }
-        }
-
-        uv.push( u1, v1, u2, v2, u3, v3 );
-      }
-    }
-
-    return uv;
-  }
-
 }

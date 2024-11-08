@@ -817,6 +817,15 @@ class Matrix4 {
     );
   }
 
+  static identity(){
+    return new Matrix4(
+      1, 0, 0, 0,
+      0, 1, 0, 0,
+      0, 0, 1, 0,
+      0, 0, 0, 1
+    );
+  }
+
   /**
    * Función que devuelve la matriz inversa de la matriz con la que se invocó la función.
    * @return {Matrix4}

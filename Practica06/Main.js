@@ -7,7 +7,7 @@ window.addEventListener("load", async function(evt) {
 
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
 
-  let texEsfera = await loadImage("texturas/esfera.png");
+  let texEsfera = await loadImage("texturas/tierra.jpg");
   let texIcosaedro = await loadImage("texturas/icosaedro.png");
   let texDodecaedro = await loadImage("texturas/dodecaedro.png");
   let texCilindro = await loadImage("texturas/cilindro.png");
