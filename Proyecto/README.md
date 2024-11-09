@@ -1,4 +1,4 @@
-# Proyecto
+# Animación Sistema Solar
 
 > Graficación por Computadora
 > Semestre 2025-01

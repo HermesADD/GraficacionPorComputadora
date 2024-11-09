@@ -4,6 +4,10 @@ class GenericGeometry{
     this.transform=transform;
   }
 
+  /**
+   * Método que inicializa los buffers para vértices, normales y coordenadas UV
+   * @param  gl Contexto WebGL
+   */
   init(gl) {
     this.vertices = this.getVertices();
 
@@ -16,6 +20,8 @@ class GenericGeometry{
   }
 
   /**
+   * Método que crea un VAO para renderizar la geometría con sombreado suave.
+   * @param gl Contexto WebGL
    */
   createSmoothVAO(gl) {
     this.smoothVAO = gl.createVertexArray();
@@ -63,6 +69,8 @@ class GenericGeometry{
   }
 
   /**
+   * Método que crea un VAO para renderizar la geometría con sombreado plano.
+   * @param gl Contexto WebGL
    */
   createFlatVAO(gl) {
     let vertices = (this.faces) ? this.getFlatVertices(this.vertices, this.faces) : this.vertices;
@@ -108,6 +116,11 @@ class GenericGeometry{
 
 
   /**
+   * Método que dibuja la geometría con sombreado plano o suave.
+   * @param  gl Contexto WebGL
+   * @param  projectionMatrix Matriz de proyección
+   * @param  viewMatrix Matriz de vista
+   * @param  light Parametros de la luz(posición,colores ambiente/difuso/especular)
    */
   draw(gl, projectionMatrix, viewMatrix, light) {
     let viewModelMatrix = Matrix4.multiply(viewMatrix, this.transform);
@@ -129,7 +142,11 @@ class GenericGeometry{
     ////////////////////////////////////////////////////////////
     // u_light.position
     if (this.material.getUniform("u_light.position") != undefined) {
-      gl.uniform3fv(this.material.getUniform("u_light.position"), light.pos);
+      gl.uniform3fv(this.material.getUniform("u_light.position"), light.getPosition());
+    }
+    // u_light.direction
+    if (this.material.getUniform("u_light.direction") != undefined) {
+      gl.uniform3fv(this.material.getUniform("u_light.direction"), light.getDirection());
     }
     // u_light.La
     if (this.material.getUniform("u_light.La") != undefined) {
@@ -142,6 +159,27 @@ class GenericGeometry{
     // u_light.Ls
     if (this.material.getUniform("u_light.Ls") != undefined) {
       gl.uniform3fv(this.material.getUniform("u_light.Ls"), light.especular);
+    }
+    // u_light.quadratic
+    if (this.material.getUniform("u_light.quadratic") != undefined) {
+      gl.uniform1f(this.material.getUniform("u_light.quadratic"), light.quadratic);
+    }
+    // u_light.linear
+    if (this.material.getUniform("u_light.linear") != undefined) {
+      gl.uniform1f(this.material.getUniform("u_light.linear"), light.linear);
+    }
+    // u_light.constant
+    if (this.material.getUniform("u_light.constant") != undefined) {
+      gl.uniform1f(this.material.getUniform("u_light.constant"), light.constant);
+    }
+    // El ángulo de apertura del cono de luz se envía como el coseno del ángulo para no calcularlo en el shader, ya que dentro del shader tenemos el coseno del angulo entre la posición de la luz y el fragmento y lo que se quiere es comparar los cosenos de los ángulos para saber si el objeto se ilumina o no
+    // u_light.cut_off
+    if (this.material.getUniform("u_light.cut_off") != undefined) {
+      gl.uniform1f(this.material.getUniform("u_light.cut_off"), Math.cos(light.cut_off));
+    }
+    // u_light.fall_off
+    if (this.material.getUniform("u_light.fall_off") != undefined) {
+      gl.uniform1f(this.material.getUniform("u_light.fall_off"), light.fall_off);
     }
     ////////////////////////////////////////////////////////////
 
@@ -197,6 +235,10 @@ class GenericGeometry{
   }
 
   /**
+   * Método que calcula normales suaves
+   * @param vertices Lista de vértices 
+   * @param faces Lista de caras
+   * @returns Arreglo de normales suaves
    */
   getSmoothNormals(vertices, faces) {
     let normals = new Array(vertices.length);
@@ -250,6 +292,10 @@ class GenericGeometry{
   }
 
   /**
+   * Método que genera arreglo de vértices duplicados para cada triángulo
+   * @param vertices Lista de vértices 
+   * @param faces Lista de caras
+   * @returns Arreglo de vértices para sombreado plano
    */
   getFlatVertices(vertices, faces) {
     let flat_vertices = [];
@@ -273,6 +319,9 @@ class GenericGeometry{
   }
 
   /**
+   * Método que calcula normales planas
+   * @param vertices Lista de vértices 
+   * @returns Arreglo de normales planas
    */
   getFlatNormals(vertices) {
     let normals = [];

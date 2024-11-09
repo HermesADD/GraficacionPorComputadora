@@ -22,9 +22,7 @@ window.addEventListener("load", async function(evt) {
   let geometry = [
     new Esfera(
       gl,
-      1050,
-      16,
-      16,
+      1050, 16, 16,
       new TextureMaterial(gl, universe),
       Matrix4.identity(),
     ),
@@ -76,13 +74,13 @@ window.addEventListener("load", async function(evt) {
       new TextureMaterial(gl, texSaturno),
       Matrix4.translate(new Vector3(-870,0,0))
     ),
-    new Anillos(
+    new Anillo(
       gl,
-      55, // Radio externo
-      40, // Radio interno para dejar un "hueco" donde está Saturno
-      32, // Segmentos
+      55, 
+      40, 
+      32, 
       new TextureMaterial(gl, texAnillosSaturno),
-      Matrix4.translate(new Vector3(-870, 0, 0)) // Coloca los anillos en la posición de Saturno
+      Matrix4.translate(new Vector3(-870, 0, 0)) 
     ),
     new Esfera(
       gl,
@@ -119,16 +117,16 @@ window.addEventListener("load", async function(evt) {
     // Rotación de los planetas alrededor del sol
     time += 0.01;
 
-    geometry[2].transform = Matrix4.multiply(Matrix4.rotateY(time * 1.6), Matrix4.translate(new Vector3(-330, 0, 0))); // Mercurio
-    geometry[3].transform = Matrix4.multiply(Matrix4.rotateY(time * 1.2), Matrix4.translate(new Vector3(-430, 0, 0))); // Venus
-    geometry[4].transform = Matrix4.multiply(Matrix4.rotateY(time), Matrix4.translate(new Vector3(-530, 0, 0))); // Tierra
-    geometry[5].transform = Matrix4.multiply(geometry[4].transform, Matrix4.translate(new Vector3(25, 0, 0))); // Luna
-    geometry[6].transform = Matrix4.multiply(Matrix4.rotateY(time * 0.8), Matrix4.translate(new Vector3(-630, 0, 0))); // Marte
-    geometry[7].transform = Matrix4.multiply(Matrix4.rotateY(time * 0.4), Matrix4.translate(new Vector3(-750, 0, 0))); // Júpiter
-    geometry[8].transform = Matrix4.multiply(Matrix4.rotateY(time * 0.3), Matrix4.translate(new Vector3(-870, 0, 0))); // Saturno
-    geometry[9].transform = geometry[8].transform; // Anillos
-    geometry[10].transform = Matrix4.multiply(Matrix4.rotateY(time * 0.2), Matrix4.translate(new Vector3(-970, 0, 0))); // Urano
-    geometry[11].transform = Matrix4.multiply(Matrix4.rotateY(time * 0.1), Matrix4.translate(new Vector3(-1000, 0, 0))); // Neptuno
+    geometry[2].transform = Matrix4.multiply(Matrix4.rotateY(time * 1.6), Matrix4.translate(new Vector3(-330, 0, 0))); 
+    geometry[3].transform = Matrix4.multiply(Matrix4.rotateY(time * 1.2), Matrix4.translate(new Vector3(-430, 0, 0))); 
+    geometry[4].transform = Matrix4.multiply(Matrix4.rotateY(time), Matrix4.translate(new Vector3(-530, 0, 0))); 
+    geometry[5].transform = Matrix4.multiply(geometry[4].transform, Matrix4.translate(new Vector3(25, 0, 0))); 
+    geometry[6].transform = Matrix4.multiply(Matrix4.rotateY(time * 0.8), Matrix4.translate(new Vector3(-630, 0, 0))); 
+    geometry[7].transform = Matrix4.multiply(Matrix4.rotateY(time * 0.4), Matrix4.translate(new Vector3(-750, 0, 0))); 
+    geometry[8].transform = Matrix4.multiply(Matrix4.rotateY(time * 0.3), Matrix4.translate(new Vector3(-870, 0, 0))); 
+    geometry[9].transform = geometry[8].transform; 
+    geometry[10].transform = Matrix4.multiply(Matrix4.rotateY(time * 0.2), Matrix4.translate(new Vector3(-970, 0, 0))); 
+    geometry[11].transform = Matrix4.multiply(Matrix4.rotateY(time * 0.1), Matrix4.translate(new Vector3(-1000, 0, 0))); 
   }
 
   let isAnimating = false;

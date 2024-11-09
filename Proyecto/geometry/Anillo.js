@@ -1,5 +1,14 @@
-class Anillos extends GenericGeometry {
-  constructor(gl, outerRadius, innerRadius, segments, material, transform) {
+class Anillo extends GenericGeometry {
+  /**
+   * Constructor de Anillo
+   * @param gl Contexto WebGL
+   * @param outerRadius Radio externo del anillo(por defecto 1)
+   * @param innerRadius Radio interno del anillo(por defecto 0.5)
+   * @param segments Número de divisiones que forman el anillo(por defecto 32)
+   * @param material Material que define las propiedades del anillo(por defecto FlatMaterial(gl))
+   * @param transform Matriz de transformacion inicial que posiciona, rota o escala(por defecto la matriz identidad)
+   */
+  constructor(gl, outerRadius = 1, innerRadius=0.5, segments=32, material= new FlatMaterial(gl), transform = Matrix4.identity()) {
     super(gl, material, transform);
     this.outerRadius = outerRadius;
     this.innerRadius = innerRadius;
@@ -7,18 +16,19 @@ class Anillos extends GenericGeometry {
     this.init(gl);
   }
 
-  // Método para obtener los vértices del disco
+ /**
+  * Método que regresa los vertices de Anillo
+  * @returns arreglo de vértices
+  */
   getVertices() {
     const vertices = [];
     const angleIncrement = (2 * Math.PI) / this.segments;
 
-    // Generar vértices para el radio interno
     for (let i = 0; i < this.segments; i++) {
       const angle = i * angleIncrement;
       vertices.push(this.innerRadius * Math.cos(angle), 0, this.innerRadius * Math.sin(angle));
     }
 
-    // Generar vértices para el radio externo
     for (let i = 0; i < this.segments; i++) {
       const angle = i * angleIncrement;
       vertices.push(this.outerRadius * Math.cos(angle), 0, this.outerRadius * Math.sin(angle));
@@ -27,19 +37,21 @@ class Anillos extends GenericGeometry {
     return vertices;
   }
 
-  // Método para obtener las caras (índices) del disco
+  /**
+   * Método que regresa las caras del anillo
+   * @returns  arreglo de caras 
+   */
   getFaces() {
     const faces = [];
     const segments = this.segments;
 
     for (let i = 0; i < segments; i++) {
-      // Triángulo del segmento (i) conectando vértices del radio interno y externo
+      
       const inner1 = i;
       const inner2 = (i + 1) % segments;
       const outer1 = i + segments;
       const outer2 = (i + 1) % segments + segments;
 
-      // Crear dos triángulos para formar el cuadrilátero entre los radios
       faces.push(inner1, outer1, outer2);
       faces.push(inner1, outer2, inner2);
     }
@@ -47,7 +59,12 @@ class Anillos extends GenericGeometry {
     return faces;
   }
 
-  // Método para obtener las coordenadas UV para mapear la textura en el disco
+  /**
+   * Método que regresa las coordenada UV para mapear la textura
+   * @param  vertices - vértices del anillo
+   * @param  isFlat - si se dibuja con flat o smooth
+   * @returns Coordenadas UV
+   */
   getUVCoordinates(vertices, isFlat) {
     let uv = [];
     let PI2 = Math.PI*2;

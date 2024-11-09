@@ -1,5 +1,12 @@
 class Esfera extends GenericGeometry{
   /**
+   * Constructor de Esfera
+   * @param gl Contexto WebGL
+   * @param radius Radio de la esfera(por defecto 1)
+   * @param Nu Número de divisiones en la dirección horizontal de la esfera(por defecto 8)
+   * @param Nv Número de divisiones en la dirección vertical de la esfera(por defecto 8)
+   * @param material Material que define las propiedades de la esfera(por defecto FlatMaterial(gl))
+   * @param transform Matriz de transformacion inicial que posiciona, rota o escala(por defecto la matriz identidad)
    */
   constructor(gl, radius=1, Nu=8, Nv=8, material=new FlatMaterial(gl), transform=Matrix4.identity()) {
     super(gl,material,transform);
@@ -12,7 +19,9 @@ class Esfera extends GenericGeometry{
   }
 
   /**
-   */
+    * Método que regresa los vertices de la Esfera
+    * @returns arreglo de vértices
+    */
   getVertices() {
     let vertices = [];
     let phi;
@@ -40,6 +49,8 @@ class Esfera extends GenericGeometry{
   }
 
   /**
+   * Método que regresa las caras del anillo
+   * @returns  arreglo de caras 
    */
   getFaces() {
     let faces = [];
@@ -77,6 +88,10 @@ class Esfera extends GenericGeometry{
   }
 
   /**
+   * Método que regresa las coordenada UV para mapear la textura
+   * @param  vertices - vértices del anillo
+   * @param  isFlat - si se dibuja con flat o smooth
+   * @returns Coordenadas UV
    */
   getUVCoordinates(vertices, isFlat) {
     let uv = [];
