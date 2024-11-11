@@ -54,7 +54,7 @@ window.addEventListener("load", async function(evt) {
       gl,
       4, 16, 16,
       new TextureMaterial(gl, texLuna),
-      Matrix4.translate(new Vector3(-555,25,0))
+      Matrix4.translate(new Vector3(-555,-25,0))
     ),
     new Esfera(
       gl,
@@ -115,12 +115,12 @@ window.addEventListener("load", async function(evt) {
 
   function updateTransformations() {
     // Rotación de los planetas alrededor del sol
-    time += 0.01;
+    time += 0.005;
 
     geometry[2].transform = Matrix4.multiply(Matrix4.rotateY(time * 1.6), Matrix4.translate(new Vector3(-330, 0, 0))); 
     geometry[3].transform = Matrix4.multiply(Matrix4.rotateY(time * 1.2), Matrix4.translate(new Vector3(-430, 0, 0))); 
     geometry[4].transform = Matrix4.multiply(Matrix4.rotateY(time), Matrix4.translate(new Vector3(-530, 0, 0))); 
-    geometry[5].transform = Matrix4.multiply(geometry[4].transform, Matrix4.translate(new Vector3(25, 0, 0))); 
+    geometry[5].transform = Matrix4.multiply(geometry[4].transform, Matrix4.translate(new Vector3(-25, 20, 0))); 
     geometry[6].transform = Matrix4.multiply(Matrix4.rotateY(time * 0.8), Matrix4.translate(new Vector3(-630, 0, 0))); 
     geometry[7].transform = Matrix4.multiply(Matrix4.rotateY(time * 0.4), Matrix4.translate(new Vector3(-750, 0, 0))); 
     geometry[8].transform = Matrix4.multiply(Matrix4.rotateY(time * 0.3), Matrix4.translate(new Vector3(-870, 0, 0))); 
