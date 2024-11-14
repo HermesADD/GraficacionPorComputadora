@@ -35,43 +35,77 @@ window.addEventListener("load", async function(evt) {
     new Esfera(
       gl, 
       5, 16, 16, 
-      new TextureMaterial(gl, texMercurio),
+      new PhongTextureMaterial(gl, 
+        [0.1,0.1,0.1], // Ka
+        [1,1,1], // Kd
+        [1,1,1], // Ks
+        100,
+        texMercurio),
       Matrix4.translate(new Vector3(-330, 0, 0))
     ),
     new Esfera(
       gl, 
       15, 16, 16, 
-      new TextureMaterial(gl, texVenus),
+      new PhongTextureMaterial(gl, 
+        [0.1,0.1,0.1], // Ka
+        [1,1,1], // Kd
+        [1,1,1], // Ks
+        100, texVenus),
       Matrix4.translate(new Vector3(-430, 0, 0))
     ),
     new Esfera(
       gl,
       20, 16, 16,
-      new TextureMaterial(gl, texTierra),
+      new PhongTextureMaterial(gl, 
+        [0.1,0.1,0.1], // Ka
+        [1,1,1], // Kd
+        [1,1,1], // Ks
+        100, 
+        texTierra),
       Matrix4.translate(new Vector3(-530,0,0))
     ),
     new Esfera(
       gl,
       4, 16, 16,
-      new TextureMaterial(gl, texLuna),
+      new PhongTextureMaterial(gl, 
+        [0.1,0.1,0.1], // Ka
+        [1,1,1], // Kd
+        [1,1,1], // Ks
+        100,
+        texLuna),
       Matrix4.translate(new Vector3(-555,-25,0))
     ),
     new Esfera(
       gl,
       15, 16, 16,
-      new TextureMaterial(gl, texMarte),
+      new PhongTextureMaterial(gl, 
+        [0.1,0.1,0.1], // Ka
+        [1,1,1], // Kd
+        [1,1,1], // Ks
+        100,
+        texMarte),
       Matrix4.translate(new Vector3(-630,0,0))
     ),
     new Esfera(
       gl,
       45, 16, 16,
-      new TextureMaterial(gl, texJupiter),
+      new PhongTextureMaterial(gl, 
+        [0.1,0.1,0.1], // Ka
+        [1,1,1], // Kd
+        [1,1,1], // Ks
+        100, 
+        texJupiter),
       Matrix4.translate(new Vector3(-750,0,0))
     ),
     new Esfera(
       gl,
       35, 16, 16,
-      new TextureMaterial(gl, texSaturno),
+      new PhongTextureMaterial(gl, 
+        [0.1,0.1,0.1], // Ka
+        [1,1,1], // Kd
+        [1,1,1], // Ks
+        100,
+        texSaturno),
       Matrix4.translate(new Vector3(-870,0,0))
     ),
     new Anillo(
@@ -79,19 +113,34 @@ window.addEventListener("load", async function(evt) {
       55, 
       40, 
       32, 
-      new TextureMaterial(gl, texAnillosSaturno),
+      new PhongTextureMaterial(gl, 
+        [0.1,0.1,0.1], // Ka
+        [1,1,1], // Kd
+        [1,1,1], // Ks
+        100, 
+        texAnillosSaturno),
       Matrix4.translate(new Vector3(-870, 0, 0)) 
     ),
     new Esfera(
       gl,
       25, 16, 16,
-      new TextureMaterial(gl, texUrano),
+      new PhongTextureMaterial(gl, 
+        [0.1,0.1,0.1], // Ka
+        [1,1,1], // Kd
+        [1,1,1], // Ks
+        100,
+        texUrano),
       Matrix4.translate(new Vector3(-970,0,0))
     ),
     new Esfera(
       gl,
       23, 16, 16,
-      new TextureMaterial(gl, texNeptuno),
+      new PhongTextureMaterial(gl, 
+        [0.1,0.1,0.1], // Ka
+        [1,1,1], // Kd
+        [1,1,1], // Ks
+        100,
+        texNeptuno),
       Matrix4.translate(new Vector3(-1000,0,0))
     ),
   ];
@@ -145,6 +194,7 @@ window.addEventListener("load", async function(evt) {
 
     let viewMatrix = camera.getMatrix();
     light.update(viewMatrix);
+
 
     updateTransformations();
 

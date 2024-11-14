@@ -140,9 +140,9 @@ class GenericGeometry{
     ////////////////////////////////////////////////////////////
     // Componentes de la luz
     ////////////////////////////////////////////////////////////
-    // u_light.direction
-    if (this.material.getUniform("u_light.direction") != undefined) {
-      gl.uniform3fv(this.material.getUniform("u_light.direction"), light.getDirection());
+    // u_light.position
+    if (this.material.getUniform("u_light.position") != undefined) {
+      gl.uniform3fv(this.material.getUniform("u_light.position"), light.getPosition());
     }
     // u_light.La
     if (this.material.getUniform("u_light.La") != undefined) {
