@@ -22,13 +22,13 @@ window.addEventListener("load", async function(evt) {
   let geometry = [
     new Esfera(
       gl,
-      1050, 16, 16,
+      4050, 16, 16,
       new TextureMaterial(gl, universe),
       Matrix4.identity(),
     ),
     new Esfera(
       gl, 
-      230, 16, 16, 
+      220, 16, 16, 
       new TextureMaterial(gl, texSol),
       Matrix4.translate(new Vector3(0, 0, 0))
     ),
@@ -41,72 +41,72 @@ window.addEventListener("load", async function(evt) {
         [1,1,1], // Ks
         100,
         texMercurio),
-      Matrix4.translate(new Vector3(-330, 0, 0))
+      Matrix4.translate(new Vector3(-430, 0, 0))
     ),
     new Esfera(
       gl, 
-      15, 16, 16, 
+      12, 16, 16, 
       new PhongTextureMaterial(gl, 
         [0.1,0.1,0.1], // Ka
         [1,1,1], // Kd
         [1,1,1], // Ks
         100, texVenus),
-      Matrix4.translate(new Vector3(-430, 0, 0))
+      Matrix4.translate(new Vector3(-630, 0, 0))
     ),
     new Esfera(
       gl,
-      20, 16, 16,
+      18, 16, 16,
       new PhongTextureMaterial(gl, 
         [0.1,0.1,0.1], // Ka
         [1,1,1], // Kd
         [1,1,1], // Ks
         100, 
         texTierra),
-      Matrix4.translate(new Vector3(-530,0,0))
+      Matrix4.translate(new Vector3(-830,0,0))
     ),
     new Esfera(
       gl,
-      4, 16, 16,
+      2, 16, 16,
       new PhongTextureMaterial(gl, 
         [0.1,0.1,0.1], // Ka
         [1,1,1], // Kd
         [1,1,1], // Ks
         100,
         texLuna),
-      Matrix4.translate(new Vector3(-555,-25,0))
+      Matrix4.translate(new Vector3(-855,-25,0))
     ),
     new Esfera(
       gl,
-      15, 16, 16,
+      13, 16, 16,
       new PhongTextureMaterial(gl, 
         [0.1,0.1,0.1], // Ka
         [1,1,1], // Kd
         [1,1,1], // Ks
         100,
         texMarte),
-      Matrix4.translate(new Vector3(-630,0,0))
+      Matrix4.translate(new Vector3(-1030,0,0))
     ),
     new Esfera(
       gl,
-      45, 16, 16,
+      40, 16, 16,
       new PhongTextureMaterial(gl, 
         [0.1,0.1,0.1], // Ka
         [1,1,1], // Kd
         [1,1,1], // Ks
         100, 
         texJupiter),
-      Matrix4.translate(new Vector3(-750,0,0))
+      Matrix4.translate(new Vector3(-1250,0,0))
     ),
     new Esfera(
       gl,
-      35, 16, 16,
+      30, 16, 16,
       new PhongTextureMaterial(gl, 
         [0.1,0.1,0.1], // Ka
         [1,1,1], // Kd
         [1,1,1], // Ks
         100,
         texSaturno),
-      Matrix4.translate(new Vector3(-870,0,0))
+      Matrix4.translate(new Vector3(-1470,0,0))
     ),
     new Anillo(
       gl,
@@ -119,40 +119,44 @@ window.addEventListener("load", async function(evt) {
         [1,1,1], // Ks
         100, 
         texAnillosSaturno),
-      Matrix4.translate(new Vector3(-870, 0, 0)) 
+      Matrix4.translate(new Vector3(-1470, 0, 0)) 
     ),
     new Esfera(
       gl,
-      25, 16, 16,
+      20, 16, 16,
       new PhongTextureMaterial(gl, 
         [0.1,0.1,0.1], // Ka
         [1,1,1], // Kd
         [1,1,1], // Ks
         100,
         texUrano),
-      Matrix4.translate(new Vector3(-970,0,0))
+      Matrix4.translate(new Vector3(-1600,0,0))
     ),
     new Esfera(
       gl,
-      23, 16, 16,
+      20, 16, 16,
       new PhongTextureMaterial(gl, 
         [0.1,0.1,0.1], // Ka
         [1,1,1], // Kd
         [1,1,1], // Ks
         100,
         texNeptuno),
-      Matrix4.translate(new Vector3(-1000,0,0))
+      Matrix4.translate(new Vector3(-1800,0,0))
     ),
   ];
 
   let camera = new OrbitCamera(
-    new Vector3(0, 1000, 70),
+    new Vector3(0, 1200, 70),
     new Vector3(0, -2, 0),
     new Vector3(0, 1, 0),
   );
   
-  let projectionMatrix = Matrix4.perspective(75*Math.PI/180, canvas.width/canvas.height, 1, 2000);
-
+  let projectionMatrix = Matrix4.perspective(
+    75*Math.PI/180,  // Campo de visión
+    canvas.width/canvas.height,  // Aspecto
+    0.1,  // Plano cercano más pequeño
+    9000  // Plano lejano más grande
+  );
   let light = new LuzPuntual(
     new Vector4(0,0,0,1),
     [ 0.2, 0.2, 0.2 ],    // component ambiental
@@ -170,18 +174,84 @@ window.addEventListener("load", async function(evt) {
 
   function updateTransformations() {
     // Rotación de los planetas alrededor del sol
-    time += 0.005;
-
-    geometry[2].transform = Matrix4.multiply(Matrix4.rotateY(time * 1.6), Matrix4.translate(new Vector3(-330, 0, 0))); 
-    geometry[3].transform = Matrix4.multiply(Matrix4.rotateY(time * 1.2), Matrix4.translate(new Vector3(-430, 0, 0))); 
-    geometry[4].transform = Matrix4.multiply(Matrix4.rotateY(time), Matrix4.translate(new Vector3(-530, 0, 0))); 
-    geometry[5].transform = Matrix4.multiply(geometry[4].transform, Matrix4.translate(new Vector3(-25, 20, 0))); 
-    geometry[6].transform = Matrix4.multiply(Matrix4.rotateY(time * 0.8), Matrix4.translate(new Vector3(-630, 0, 0))); 
-    geometry[7].transform = Matrix4.multiply(Matrix4.rotateY(time * 0.4), Matrix4.translate(new Vector3(-750, 0, 0))); 
-    geometry[8].transform = Matrix4.multiply(Matrix4.rotateY(time * 0.3), Matrix4.translate(new Vector3(-870, 0, 0))); 
+    time += 0.0023;
+  
+    // Rotación alrededor del sol
+    geometry[2].transform = Matrix4.multiply(
+      Matrix4.rotateY(time * 1.6),  // Rotación alrededor del sol
+      Matrix4.multiply(
+        Matrix4.rotateY(time * 2),  // Rotación sobre su propio eje
+        Matrix4.translate(new Vector3(-430, 0, 0))
+      )
+    ); 
+  
+    geometry[3].transform = Matrix4.multiply(
+      Matrix4.rotateY(time * 1.2),  // Rotación alrededor del sol
+      Matrix4.multiply(
+        Matrix4.rotateY(time * 1.5),  // Rotación sobre su propio eje
+        Matrix4.translate(new Vector3(-630, 0, 0))
+      )
+    ); 
+  
+    geometry[4].transform = Matrix4.multiply(
+      Matrix4.rotateY(time),  // Rotación alrededor del sol
+      Matrix4.multiply(
+        Matrix4.rotateY(time),  // Rotación sobre su propio eje
+        Matrix4.translate(new Vector3(-830, 0, 0))
+      )
+    ); 
+  
+    // Luna gira con la Tierra y sobre su propio eje
+    geometry[5].transform = Matrix4.multiply(
+      geometry[4].transform,  // Sigue la órbita de la Tierra
+      Matrix4.multiply(
+        Matrix4.rotateY(time * 1.5),  // Rotación sobre su propio eje
+        Matrix4.translate(new Vector3(-25, 20, 0))
+      )
+    ); 
+  
+    geometry[6].transform = Matrix4.multiply(
+      Matrix4.rotateY(time * 0.8),  // Rotación alrededor del sol
+      Matrix4.multiply(
+        Matrix4.rotateY(time * 1.3),  // Rotación sobre su propio eje
+        Matrix4.translate(new Vector3(-1030, 0, 0))
+      )
+    ); 
+  
+    geometry[7].transform = Matrix4.multiply(
+      Matrix4.rotateY(time * 0.4),  // Rotación alrededor del sol
+      Matrix4.multiply(
+        Matrix4.rotateY(time * 0.9),  // Rotación sobre su propio eje
+        Matrix4.translate(new Vector3(-1250, 0, 0))
+      )
+    ); 
+  
+    geometry[8].transform = Matrix4.multiply(
+      Matrix4.rotateY(time * 0.3),  // Rotación alrededor del sol
+      Matrix4.multiply(
+        Matrix4.rotateY(time * 0.6),  // Rotación sobre su propio eje
+        Matrix4.translate(new Vector3(-1470, 0, 0))
+      )
+    ); 
+    
+    // Los anillos de Saturno siguen a Saturno
     geometry[9].transform = geometry[8].transform; 
-    geometry[10].transform = Matrix4.multiply(Matrix4.rotateY(time * 0.2), Matrix4.translate(new Vector3(-970, 0, 0))); 
-    geometry[11].transform = Matrix4.multiply(Matrix4.rotateY(time * 0.1), Matrix4.translate(new Vector3(-1000, 0, 0))); 
+  
+    geometry[10].transform = Matrix4.multiply(
+      Matrix4.rotateY(time * 0.2),  // Rotación alrededor del sol
+      Matrix4.multiply(
+        Matrix4.rotateY(time * 0.4),  // Rotación sobre su propio eje
+        Matrix4.translate(new Vector3(-1600, 0, 0))
+      )
+    ); 
+  
+    geometry[11].transform = Matrix4.multiply(
+      Matrix4.rotateY(time * 0.1),  // Rotación alrededor del sol
+      Matrix4.multiply(
+        Matrix4.rotateY(time * 0.2),  // Rotación sobre su propio eje
+        Matrix4.translate(new Vector3(-1800, 0, 0))
+      )
+    ); 
   }
 
   let isAnimating = false;
@@ -197,7 +267,6 @@ window.addEventListener("load", async function(evt) {
 
 
     updateTransformations();
-
     for (let i = 0; i < geometry.length; i++) {
       geometry[i].draw(
         gl,

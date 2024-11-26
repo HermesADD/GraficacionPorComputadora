@@ -46,10 +46,10 @@ class OrbitCamera {
           this.theta -= MOVE_STEP;
           break;
         case "+": // Acercar
-          this.radius = Math.max(this.radius - ZOOM_STEP, 50); // No permitir acercarse demasiado
+          this.radius = Math.max(this.radius - ZOOM_STEP, 250); // No permitir acercarse demasiado
           break;
         case "-": // Alejar
-          this.radius = Math.min(this.radius + ZOOM_STEP, 2000); // No permitir alejarse demasiado
+          this.radius = Math.min(this.radius + ZOOM_STEP, 2500); // No permitir alejarse demasiado
           break;
       }
 
