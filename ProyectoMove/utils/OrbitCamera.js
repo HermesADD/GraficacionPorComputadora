@@ -29,32 +29,32 @@ class OrbitCamera {
   /** Registra eventos de teclado para controlar la cámara */
   registerKeyEvents(canvas, draw_callback) {
     window.addEventListener("keydown", (evt) => {
-      const MOVE_STEP = 0.05; // Incremento para theta/phi
-      const ZOOM_STEP = 10;  // Incremento para el radio
+      const MOVE_STEP = 0.05;
+      const ZOOM_STEP = 10;  
 
       switch (evt.key) {
-        case "ArrowUp": // Mover hacia arriba
+        case "ArrowUp": 
           this.phi = Math.min(this.phi + MOVE_STEP, Math.PI / 2 - 0.01);
           break;
-        case "ArrowDown": // Mover hacia abajo
+        case "ArrowDown": 
           this.phi = Math.max(this.phi - MOVE_STEP, -Math.PI / 2 + 0.01);
           break;
-        case "ArrowLeft": // Girar a la izquierda
+        case "ArrowLeft": 
           this.theta += MOVE_STEP;
           break;
-        case "ArrowRight": // Girar a la derecha
+        case "ArrowRight": 
           this.theta -= MOVE_STEP;
           break;
-        case "+": // Acercar
-          this.radius = Math.max(this.radius - ZOOM_STEP, 250); // No permitir acercarse demasiado
+        case "+": 
+          this.radius = Math.max(this.radius - ZOOM_STEP, 250); 
           break;
-        case "-": // Alejar
-          this.radius = Math.min(this.radius + ZOOM_STEP, 2500); // No permitir alejarse demasiado
+        case "-": 
+          this.radius = Math.min(this.radius + ZOOM_STEP, 2500); 
           break;
       }
 
       this.updatePosition();
-      draw_callback(); // Redibuja la escena con la nueva posición de la cámara
+      draw_callback();
     });
   }
 }

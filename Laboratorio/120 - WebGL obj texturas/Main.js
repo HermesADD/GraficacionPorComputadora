@@ -8,10 +8,11 @@ window.addEventListener("load", async function(evt) {
   let geometry = [
     new OBJGeometry(
       gl, 
-      // await parseObj("models/ponmi/ponmi.obj"), 
-      await parseObj("models/camara/camara.obj"), 
+      // await parseObj("models/ponmi/ponmi.obj"),
+       await parseObj("models/asteroid/asteroid.obj"),
+      //await parseObj("models/camara/camara.obj"), 
       new PhongMaterial(gl, [0.1, 0.1, 0.1], [1, 0, 0], [0, 0, 0], 0.1), 
-      translate(0, 0, 0) 
+      translate(10, 10, 10) 
     ),
   ];
 

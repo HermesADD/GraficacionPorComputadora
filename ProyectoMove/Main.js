@@ -36,77 +36,77 @@ window.addEventListener("load", async function(evt) {
       gl, 
       5, 16, 16, 
       new PhongTextureMaterial(gl, 
-        [0.1,0.1,0.1], // Ka
-        [1,1,1], // Kd
-        [1,1,1], // Ks
+        [0.1,0.1,0.1],
+        [1,1,1], 
+        [1,1,1], 
         100,
         texMercurio),
-      Matrix4.translate(new Vector3(-430, 0, 0))
+      Matrix4.translate(new Vector3(-530, 0, 0))
     ),
     new Esfera(
       gl, 
       12, 16, 16, 
       new PhongTextureMaterial(gl, 
-        [0.1,0.1,0.1], // Ka
-        [1,1,1], // Kd
-        [1,1,1], // Ks
+        [0.1,0.1,0.1], 
+        [1,1,1], 
+        [1,1,1], 
         100, texVenus),
-      Matrix4.translate(new Vector3(-630, 0, 0))
+      Matrix4.translate(new Vector3(-730, 0, 0))
     ),
     new Esfera(
       gl,
       18, 16, 16,
       new PhongTextureMaterial(gl, 
-        [0.1,0.1,0.1], // Ka
-        [1,1,1], // Kd
-        [1,1,1], // Ks
+        [0.1,0.1,0.1], 
+        [1,1,1], 
+        [1,1,1], 
         100, 
         texTierra),
-      Matrix4.translate(new Vector3(-830,0,0))
+      Matrix4.translate(new Vector3(-930,0,0))
     ),
     new Esfera(
       gl,
       2, 16, 16,
       new PhongTextureMaterial(gl, 
-        [0.1,0.1,0.1], // Ka
-        [1,1,1], // Kd
-        [1,1,1], // Ks
+        [0.1,0.1,0.1], 
+        [1,1,1], 
+        [1,1,1], 
         100,
         texLuna),
-      Matrix4.translate(new Vector3(-855,-25,0))
+      Matrix4.translate(new Vector3(-955,-25,0))
     ),
     new Esfera(
       gl,
       13, 16, 16,
       new PhongTextureMaterial(gl, 
-        [0.1,0.1,0.1], // Ka
-        [1,1,1], // Kd
-        [1,1,1], // Ks
+        [0.1,0.1,0.1], 
+        [1,1,1], 
+        [1,1,1], 
         100,
         texMarte),
-      Matrix4.translate(new Vector3(-1030,0,0))
+      Matrix4.translate(new Vector3(-1130,0,0))
     ),
     new Esfera(
       gl,
       40, 16, 16,
       new PhongTextureMaterial(gl, 
-        [0.1,0.1,0.1], // Ka
-        [1,1,1], // Kd
-        [1,1,1], // Ks
+        [0.1,0.1,0.1], 
+        [1,1,1],
+        [1,1,1], 
         100, 
         texJupiter),
-      Matrix4.translate(new Vector3(-1250,0,0))
+      Matrix4.translate(new Vector3(-1350,0,0))
     ),
     new Esfera(
       gl,
       30, 16, 16,
       new PhongTextureMaterial(gl, 
-        [0.1,0.1,0.1], // Ka
-        [1,1,1], // Kd
-        [1,1,1], // Ks
+        [0.1,0.1,0.1],
+        [1,1,1], 
+        [1,1,1], 
         100,
         texSaturno),
-      Matrix4.translate(new Vector3(-1470,0,0))
+      Matrix4.translate(new Vector3(-1570,0,0))
     ),
     new Anillo(
       gl,
@@ -114,54 +114,54 @@ window.addEventListener("load", async function(evt) {
       40, 
       32, 
       new PhongTextureMaterial(gl, 
-        [0.1,0.1,0.1], // Ka
-        [1,1,1], // Kd
-        [1,1,1], // Ks
+        [0.1,0.1,0.1], 
+        [1,1,1], 
+        [1,1,1], 
         100, 
         texAnillosSaturno),
-      Matrix4.translate(new Vector3(-1470, 0, 0)) 
+      Matrix4.translate(new Vector3(-1570, 0, 0)) 
     ),
     new Esfera(
       gl,
       20, 16, 16,
       new PhongTextureMaterial(gl, 
-        [0.1,0.1,0.1], // Ka
-        [1,1,1], // Kd
-        [1,1,1], // Ks
+        [0.1,0.1,0.1], 
+        [1,1,1], 
+        [1,1,1], 
         100,
         texUrano),
-      Matrix4.translate(new Vector3(-1600,0,0))
+      Matrix4.translate(new Vector3(-1770,0,0))
     ),
     new Esfera(
       gl,
       20, 16, 16,
       new PhongTextureMaterial(gl, 
-        [0.1,0.1,0.1], // Ka
-        [1,1,1], // Kd
-        [1,1,1], // Ks
+        [0.1,0.1,0.1], 
+        [1,1,1], 
+        [1,1,1], 
         100,
         texNeptuno),
-      Matrix4.translate(new Vector3(-1800,0,0))
+      Matrix4.translate(new Vector3(-1900,0,0))
     ),
   ];
 
   let camera = new OrbitCamera(
-    new Vector3(0, 1200, 70),
+    new Vector3(0, 2200, 70),
     new Vector3(0, -2, 0),
     new Vector3(0, 1, 0),
   );
   
   let projectionMatrix = Matrix4.perspective(
-    75*Math.PI/180,  // Campo de visión
-    canvas.width/canvas.height,  // Aspecto
-    0.1,  // Plano cercano más pequeño
-    9000  // Plano lejano más grande
+    75*Math.PI/180,  
+    canvas.width/canvas.height, 
+    0.1,  
+    9000  
   );
   let light = new LuzPuntual(
     new Vector4(0,0,0,1),
-    [ 0.2, 0.2, 0.2 ],    // component ambiental
-    [ 1, 1, 1 ],          // componente difuso
-    [ 1, 1, 1 ]           // componente especular
+    [ 0.2, 0.2, 0.2 ],    
+    [ 1, 1, 1 ],         
+    [ 1, 1, 1 ]           
   );
 
 
@@ -172,83 +172,81 @@ window.addEventListener("load", async function(evt) {
   
   let time = 0;
 
-  function updateTransformations() {
-    // Rotación de los planetas alrededor del sol
+  function updateTransformations(){
+    
     time += 0.0023;
   
-    // Rotación alrededor del sol
     geometry[2].transform = Matrix4.multiply(
-      Matrix4.rotateY(time * 1.6),  // Rotación alrededor del sol
+      Matrix4.rotateY(time * 1.6),  
       Matrix4.multiply(
-        Matrix4.rotateY(time * 2),  // Rotación sobre su propio eje
+        Matrix4.rotateY(time * 2),  
         Matrix4.translate(new Vector3(-430, 0, 0))
       )
     ); 
   
     geometry[3].transform = Matrix4.multiply(
-      Matrix4.rotateY(time * 1.2),  // Rotación alrededor del sol
+      Matrix4.rotateY(time * 1.2),  
       Matrix4.multiply(
-        Matrix4.rotateY(time * 1.5),  // Rotación sobre su propio eje
+        Matrix4.rotateY(time * 1.5),  
         Matrix4.translate(new Vector3(-630, 0, 0))
       )
     ); 
   
     geometry[4].transform = Matrix4.multiply(
-      Matrix4.rotateY(time),  // Rotación alrededor del sol
+      Matrix4.rotateY(time),  
       Matrix4.multiply(
-        Matrix4.rotateY(time),  // Rotación sobre su propio eje
+        Matrix4.rotateY(time), 
         Matrix4.translate(new Vector3(-830, 0, 0))
       )
     ); 
   
-    // Luna gira con la Tierra y sobre su propio eje
+    
     geometry[5].transform = Matrix4.multiply(
-      geometry[4].transform,  // Sigue la órbita de la Tierra
+      geometry[4].transform,  
       Matrix4.multiply(
-        Matrix4.rotateY(time * 1.5),  // Rotación sobre su propio eje
+        Matrix4.rotateY(time * 1.5),  
         Matrix4.translate(new Vector3(-25, 20, 0))
       )
     ); 
   
     geometry[6].transform = Matrix4.multiply(
-      Matrix4.rotateY(time * 0.8),  // Rotación alrededor del sol
+      Matrix4.rotateY(time * 0.8),  
       Matrix4.multiply(
-        Matrix4.rotateY(time * 1.3),  // Rotación sobre su propio eje
+        Matrix4.rotateY(time * 1.3),  
         Matrix4.translate(new Vector3(-1030, 0, 0))
       )
     ); 
   
     geometry[7].transform = Matrix4.multiply(
-      Matrix4.rotateY(time * 0.4),  // Rotación alrededor del sol
+      Matrix4.rotateY(time * 0.4),  
       Matrix4.multiply(
-        Matrix4.rotateY(time * 0.9),  // Rotación sobre su propio eje
+        Matrix4.rotateY(time * 0.9),  
         Matrix4.translate(new Vector3(-1250, 0, 0))
       )
     ); 
   
     geometry[8].transform = Matrix4.multiply(
-      Matrix4.rotateY(time * 0.3),  // Rotación alrededor del sol
+      Matrix4.rotateY(time * 0.3),  
       Matrix4.multiply(
-        Matrix4.rotateY(time * 0.6),  // Rotación sobre su propio eje
+        Matrix4.rotateY(time * 0.6), 
         Matrix4.translate(new Vector3(-1470, 0, 0))
       )
     ); 
     
-    // Los anillos de Saturno siguen a Saturno
     geometry[9].transform = geometry[8].transform; 
   
     geometry[10].transform = Matrix4.multiply(
-      Matrix4.rotateY(time * 0.2),  // Rotación alrededor del sol
+      Matrix4.rotateY(time * 0.2),  
       Matrix4.multiply(
-        Matrix4.rotateY(time * 0.4),  // Rotación sobre su propio eje
+        Matrix4.rotateY(time * 0.4),  
         Matrix4.translate(new Vector3(-1600, 0, 0))
       )
     ); 
   
     geometry[11].transform = Matrix4.multiply(
-      Matrix4.rotateY(time * 0.1),  // Rotación alrededor del sol
+      Matrix4.rotateY(time * 0.1),  
       Matrix4.multiply(
-        Matrix4.rotateY(time * 0.2),  // Rotación sobre su propio eje
+        Matrix4.rotateY(time * 0.2),
         Matrix4.translate(new Vector3(-1800, 0, 0))
       )
     ); 
@@ -258,7 +256,7 @@ window.addEventListener("load", async function(evt) {
   
   function draw() {
     if (!isAnimating) {
-      isAnimating = true; // Activa la bandera para evitar llamadas múltiples.
+      isAnimating = true;
     }
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
@@ -281,7 +279,6 @@ window.addEventListener("load", async function(evt) {
 
   draw();
   camera.registerKeyEvents(gl.canvas, () => {
-    // Solo llama a draw si no está ya corriendo
     if (!isAnimating) {
       draw();
     }

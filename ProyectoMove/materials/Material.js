@@ -1,6 +1,13 @@
 let materialCache = {};
 
 class Material {
+  /**
+   * Constructor de la clase Material
+   * @param gl - Contexto WebGL donde se utiliza este material.
+   * @param color - Color asociado al material.
+   * @param vertexShaderSource - Código fuente del shader de vértices.
+   * @param fragmentShaderSource - Código fuente del shader de fragmentos.
+   */
   constructor(gl, color, vertexShaderSource, fragmentShaderSource) {
     this.color = color;
 
@@ -17,6 +24,9 @@ class Material {
   }
 
   /**
+   * Obtiene la lista de atributos activos en el programa WebGL.
+   * @param gl - Contexto WebGL.
+   * @returns Los nombres de los atributos como claves y sus ubicaciones como valores.
    */
   getAttributesList(gl) {
     let attributes = {};
@@ -31,6 +41,9 @@ class Material {
   }
 
   /**
+   * Obtiene la lista de uniformes activos en el programa WebGL.
+   * @param gl - Contexto WebGL.
+   * @returns Los nombres de los uniformes como claves y sus ubicaciones como valores.
    */
   getUniformsList(gl) {
     let uniforms = {};
@@ -44,13 +57,19 @@ class Material {
     return uniforms;
   }
 
-  /** 
+  /**
+   * Obtiene la ubicación de un atributo específico.
+   * @param name - Nombre del atributo.
+   * @returns Ubicación del atributo en el programa WebGL.
    */
   getAttribute(name) {
     return this.attributes[name];
   }
 
-  /** 
+  /**
+   * Obtiene la ubicación de un uniforme específico.
+   * @param name - Nombre del uniforme.
+   * @returns  Ubicación del uniforme en el programa WebGL.
    */
   getUniform(name) {
     return this.uniforms[name];
